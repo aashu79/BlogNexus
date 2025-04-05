@@ -7,6 +7,8 @@ pageEncoding="UTF-8"%>
     <title>Insert title here</title>
   </head>
   <body>
+      <jsp:include page="../components/navbar.jsp" />
+  
     <h1>hello world</h1>
   </body>
 </html>
