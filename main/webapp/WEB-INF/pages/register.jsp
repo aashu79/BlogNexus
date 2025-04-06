@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="page-container">
-        <!-- Left section with illustrations -->
+        <!-- Left section with a background -->
         <div class="visual-section">
             <div class="brand">
                 <svg class="logo" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,7 +27,7 @@
                 <div class="blob blob-2"></div>
                 <div class="blob blob-3"></div>
                 
-                <!-- Decorative elements -->
+                <!--svg  elements -->
                 <div class="deco-element tech">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 7H4C2.89543 7 2 7.89543 2 9V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V9C22 7.89543 21.1046 7 20 7Z" stroke="#83D0CB" stroke-width="2" stroke-linecap="round"/>

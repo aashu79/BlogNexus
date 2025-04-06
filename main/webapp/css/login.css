@@ -17,26 +17,6 @@
   --bg-light: #F8FBF9;
   --border: #E0EDE5;
   --border-light: #EDF6F0;
-  
-  --shadow-sm: 0px 2px 6px rgba(140, 189, 157, 0.05);
-  --shadow-md: 0px 8px 16px rgba(140, 189, 157, 0.08);
-  --shadow-lg: 0px 16px 24px rgba(140, 189, 157, 0.1);
-  
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-full: 999px;
-  
-  --font-sans: 'DM Sans', sans-serif;
-  --font-cursive: 'Satisfy', cursive;
-  
-  --transition-fast: 0.2s ease;
-  --transition-normal: 0.3s ease;
-  --transition-slow: 0.5s ease;
-  
-  --anim-springy: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --anim-smooth: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 *, *::before, *::after {
@@ -46,7 +26,7 @@
 }
 
 body, html {
-  font-family: var(--font-sans);
+  font-family: 'DM Sans', sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: var(--text-dark);
@@ -63,7 +43,7 @@ body, html {
 /* --- VISUAL SECTION STYLES --- */
 .visual-section {
   width: 45%;
-  background: linear-gradient(135deg, #A5D6B8, #8CBD9D);
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
   padding: 2.5rem;
   color: white;
   display: flex;
@@ -108,7 +88,6 @@ body, html {
   background-color: rgba(255, 243, 192, 0.5);
   top: 5%;
   left: 10%;
-  animation: float 8s infinite alternate var(--anim-smooth);
 }
 
 .blob-2 {
@@ -117,7 +96,6 @@ body, html {
   background-color: rgba(232, 192, 125, 0.3);
   bottom: 15%;
   right: -5%;
-  animation: float 12s infinite alternate-reverse var(--anim-smooth);
 }
 
 .blob-3 {
@@ -126,7 +104,6 @@ body, html {
   background-color: rgba(184, 224, 210, 0.4);
   top: 30%;
   right: 20%;
-  animation: float 10s infinite alternate var(--anim-smooth);
 }
 
 .deco-element {
@@ -138,7 +115,6 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: spin 15s linear infinite;
   z-index: 2;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
@@ -151,21 +127,16 @@ body, html {
 .deco-element.tech {
   top: 15%;
   right: 20%;
-  animation-duration: 30s;
 }
 
 .deco-element.travel {
   bottom: 25%;
   left: 15%;
-  animation-duration: 35s;
-  animation-direction: reverse;
 }
 
 .deco-element.lifestyle {
   bottom: 20%;
   right: 25%;
-  animation-duration: 32s;
-  animation-direction: reverse;
 }
 
 .dot {
@@ -211,7 +182,7 @@ body, html {
 
 .quote p {
   color: rgba(255, 255, 255, 0.9);
-  font-family: var(--font-cursive);
+  font-family: 'Satisfy', cursive;
   font-size: 1.1rem;
 }
 
@@ -280,19 +251,19 @@ body, html {
   width: 100%;
   padding: 0.8rem 1rem 0.8rem 2.75rem;
   border: 2px solid var(--border);
-  border-radius: var(--radius-md);
-  font-family: var(--font-sans);
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.95rem;
   color: var(--text-dark);
   background-color: var(--bg-white);
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
 }
 
 .input-with-icon i {
   position: absolute;
   left: 1rem;
   color: var(--text-light);
-  transition: var(--transition-fast);
+  transition: 0.2s ease;
   pointer-events: none;
 }
 
@@ -330,7 +301,7 @@ body, html {
   height: 30px;
   z-index: 10;
   border-radius: 50%;
-  transition: var(--transition-normal);
+  transition: 0.3s ease;
 }
 
 .toggle-password:hover {
@@ -366,7 +337,7 @@ body, html {
   border: 2px solid var(--border);
   border-radius: 4px;
   position: relative;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
 }
 
 .remember-me input[type="checkbox"]:checked + .checkbox-custom::after {
@@ -394,11 +365,11 @@ body, html {
   color: var(--primary);
   font-size: 0.85rem;
   text-decoration: none;
-  transition: color var(--transition-fast);
+  transition: color 0.2s ease;
 }
 
 .forgot-password:hover {
-  color: var(--primary-dark);
+  color: var(--primary);
   text-decoration: underline;
 }
 
@@ -406,14 +377,14 @@ body, html {
   width: 100%;
   padding: 0.9rem;
   border: none;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, #A5D6B8, #8CBD9D);
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
   color: white;
-  font-family: var(--font-sans);
+  font-family: 'DM Sans', sans-serif;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s var(--anim-springy);
+  transition: all 0.3s;
   box-shadow: 0 5px 15px rgba(140, 189, 157, 0.2);
   margin-bottom: 1.5rem;
 }
@@ -437,24 +408,12 @@ body, html {
   color: var(--primary);
   text-decoration: none;
   font-weight: 500;
-  transition: var(--transition-fast);
+  transition: 0.2s ease;
 }
 
 .form-footer a:hover {
-  color: var(--primary-dark);
+  color: var(--primary-light);
   text-decoration: underline;
-}
-
-/* Animations */
-@keyframes float {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(10px, -15px) rotate(5deg); }
-  100% { transform: translate(-5px, 10px) rotate(-3deg); }
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 /* Responsive */
