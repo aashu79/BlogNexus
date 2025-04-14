@@ -1,22 +1,16 @@
 :root {
-  --primary: #8CBD9D;
-  --primary-light: #A5D6B8;
-  --primary-lightest: #E8F4EA;
-  --secondary: #83D0CB;
-  --accent-yellow: #FFF3C0;
-  --accent-beige: #E8C07D;
-  --accent-mint: #B8E0D2;
-  --accent-peach: #FADCB9;
-  --text-dark: #3D5249;
-  --text-medium: #6A8575;
-  --text-light: #97B2A3;
-  --success: #7AE6B6;
-  --warning: #FFD087;
-  --error: #FFA5B7;
-  --bg-white: #FFFFFF;
-  --bg-light: #F8FBF9;
-  --border: #E0EDE5;
-  --border-light: #EDF6F0;
+  --primary: #2e8b57;         /* Sea green - main color */
+  --primary-light: #3da370;   /* Lighter sea green */
+  --primary-lightest: #e8f5ef; /* Very light sea green background */
+  --accent-yellow: #ffd166;   /* Vibrant yellow */
+  --accent-beige: #e9c46a;    /* Warm sand/gold */
+  --text-dark: #264653;       /* Deep teal for text */
+  --text-medium: #457b9d;     /* Medium blue-green for secondary text */
+  --text-light: #7ea8be;      /* Light blue-green for tertiary text */
+  --bg-white: #ffffff;        /* Pure white */
+  --bg-light: #f7f9fa;        /* Subtle off-white background */
+  --border: #d8e2dc;          /* Soft mint border */
+  --border-light: #eaf4f0;    /* Very light mint border */
 }
 
 *, *::before, *::after {
