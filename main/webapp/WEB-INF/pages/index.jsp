@@ -54,7 +54,7 @@
 
     <!-- Featured Posts Section -->
     <section class="featured-posts section" id="featured">
-        <div class="container">
+        <div class="container">i
             <div class="section-header">
                 <h2 class="section-title">Featured Stories</h2>
                 <p class="section-subtitle">Handpicked articles from our editors to inspire and inform.</p>
