@@ -7,4 +7,5 @@
     <url-pattern>/css/*</url-pattern>
     <url-pattern>/resources/*</url-pattern>
   </servlet-mapping>
+  
 </web-app>
