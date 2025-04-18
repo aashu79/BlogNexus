@@ -122,14 +122,15 @@
 <jsp:include page="./fontawesome.jsp"></jsp:include>
 
 <div class="toast-container">
-  <c:if test="${not empty success}">
-    <div id="successMessage" class="toast-message toast-success">
+  <%-- Check for success message in both request and session scopes --%>
+  <c:if test="${not empty success || not empty sessionScope.success}">
+    <div id="successMessage" class="toast-message toast-success" data-message-type="success" data-message-scope="${not empty success ? 'request' : 'session'}">
       <div class="toast-content">
         <div class="toast-icon">
           <i class="fas fa-check-circle"></i>
         </div>
         <div class="toast-message-text">
-          <c:out value="${success}" />
+          <c:out value="${not empty success ? success : sessionScope.success}" />
         </div>
         <button class="toast-close" onclick="closeToast('successMessage')" aria-label="Close">
           <i class="fas fa-times"></i>
@@ -141,14 +142,15 @@
     </div>
   </c:if>
 
-  <c:if test="${not empty error}">
-    <div id="errorMessage" class="toast-message toast-error">
+  <%-- Check for error message in both request and session scopes --%>
+  <c:if test="${not empty error || not empty sessionScope.error}">
+    <div id="errorMessage" class="toast-message toast-error" data-message-type="error" data-message-scope="${not empty error ? 'request' : 'session'}">
       <div class="toast-content">
         <div class="toast-icon">
           <i class="fas fa-exclamation-circle"></i>
         </div>
         <div class="toast-message-text">
-          <c:out value="${error}" />
+          <c:out value="${not empty error ? error : sessionScope.error}" />
         </div>
         <button class="toast-close" onclick="closeToast('errorMessage')" aria-label="Close">
           <i class="fas fa-times"></i>
@@ -167,11 +169,22 @@ function closeToast(id) {
   if (toast) {
     toast.classList.add('hide');
     
+    // Store the scope and type for cleanup
+    const messageType = toast.getAttribute('data-message-type');
+    const messageScope = toast.getAttribute('data-message-scope');
+    
     setTimeout(() => {
       toast.remove();
       
-      // Remove from session
+      // Remove attribute based on scope and type
       <% 
+      // Clean up both request and session attributes
+      if (request.getAttribute("success") != null) {
+        request.removeAttribute("success");
+      }
+      if (request.getAttribute("error") != null) {
+        request.removeAttribute("error");
+      }
       if (session.getAttribute("success") != null) {
         session.removeAttribute("success");
       }
