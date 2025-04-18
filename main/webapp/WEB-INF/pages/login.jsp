@@ -82,6 +82,7 @@
                 <h1>Welcome Back</h1>
                 <p>Sign in to continue to your account</p>
             </div>
+            <jsp:include page="../components/message_handler.jsp"/>
 
             <form action="loginProcess.jsp" method="post">
                 <div class="form-field">
