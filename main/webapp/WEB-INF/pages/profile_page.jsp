@@ -9,14 +9,14 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+        
     <!-- Base Styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile_page.css">
 </head>
 <body>
+<jsp:include page="../components/fontawesome.jsp"/>
+
     <!-- Include Navbar -->
     <jsp:include page="../components/navbar.jsp" />
 

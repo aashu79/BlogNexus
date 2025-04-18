@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,19 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlogNexus</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Satisfy&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Link to your external CSS file -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css">
     <!-- You can embed your CSS here if you prefer everything in one file -->
 </head>
 <body>
+<jsp:include page="./fontawesome.jsp"/>
+
+    <%-- Set common variables --%>
+    <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+    <c:set var="appName" value="BlogNexus" />
+    <c:set var="currentPath" value="${pageContext.request.servletPath}" />
+    
     <nav class="navbar">
         <div class="navbar-container">
             <!-- Logo -->
             <div class="navbar-logo">
-                <a href="/" class="logo-link">
-
-                    <span class="logo-text">BlogNexus</span>
+                <a href="${contextPath}/" class="logo-link">
+                    <span class="logo-text">${appName}</span>
                 </a>
             </div>
             
@@ -30,8 +39,8 @@
             <div class="navbar-content" id="navbar-content">
                 <!-- Main Navigation -->
                 <ul class="navbar-menu">
-                    <li class="navbar-item active">
-                        <a href="index.html" class="navbar-link">Home</a>
+                    <li class="navbar-item ${currentPath eq '/' ? 'active' : ''}">
+                        <a href="${contextPath}/" class="navbar-link">Home</a>
                     </li>
                     <li class="navbar-item has-submenu">
                         <a href="javascript:void(0)" class="navbar-link">
@@ -39,27 +48,27 @@
                             <i class="fa-solid fa-chevron-down"></i>
                         </a>
                         <ul class="submenu">
-                            <li><a href="category.html?cat=technology"><i class="fa-solid fa-microchip"></i> Technology</a></li>
-                            <li><a href="category.html?cat=travel"><i class="fa-solid fa-compass"></i> Travel</a></li>
-                            <li><a href="category.html?cat=food"><i class="fa-solid fa-utensils"></i> Food</a></li>
-                            <li><a href="category.html?cat=lifestyle"><i class="fa-solid fa-heart"></i> Lifestyle</a></li>
-                            <li><a href="category.html?cat=fashion"><i class="fa-solid fa-shirt"></i> Fashion</a></li>
-                            <li><a href="category.html?cat=health"><i class="fa-solid fa-heart-pulse"></i> Health</a></li>
+                            <li><a href="${contextPath}/category?cat=technology"><i class="fa-solid fa-microchip"></i> Technology</a></li>
+                            <li><a href="${contextPath}/category?cat=travel"><i class="fa-solid fa-compass"></i> Travel</a></li>
+                            <li><a href="${contextPath}/category?cat=food"><i class="fa-solid fa-utensils"></i> Food</a></li>
+                            <li><a href="${contextPath}/category?cat=lifestyle"><i class="fa-solid fa-heart"></i> Lifestyle</a></li>
+                            <li><a href="${contextPath}/category?cat=fashion"><i class="fa-solid fa-shirt"></i> Fashion</a></li>
+                            <li><a href="${contextPath}/category?cat=health"><i class="fa-solid fa-heart-pulse"></i> Health</a></li>
                         </ul>
                     </li>
-                    <li class="navbar-item">
-                        <a href="featured.html" class="navbar-link">Featured</a>
+                    <li class="navbar-item ${currentPath eq '/featured' ? 'active' : ''}">
+                        <a href="${contextPath}/featured" class="navbar-link">Featured</a>
                     </li>
-                    <li class="navbar-item">
-                        <a href="about.html" class="navbar-link">About</a>
+                    <li class="navbar-item ${currentPath eq '/about' ? 'active' : ''}">
+                        <a href="${contextPath}/about" class="navbar-link">About</a>
                     </li>
-                    <li class="navbar-item">
-                        <a href="contact.html" class="navbar-link">Contact</a>
+                    <li class="navbar-item ${currentPath eq '/contact' ? 'active' : ''}">
+                        <a href="${contextPath}/contact" class="navbar-link">Contact</a>
                     </li>
                 </ul>
                 
                 <!-- Search Form -->
-                <form class="search-form" action="search.html" method="get">
+                <form class="search-form" action="${contextPath}/search" method="get">
                     <div class="search-container">
                         <input type="text" name="query" placeholder="Search..." class="search-input">
                         <button type="submit" class="search-btn" aria-label="Search">
@@ -70,8 +79,27 @@
                 
                 <!-- User Actions -->
                 <div class="user-actions">
-                    <a href="login.html" class="btn btn-outline">Sign In</a>
-                    <a href="register.html" class="btn btn-primary">Sign Up</a>
+                    <c:choose>
+                        <c:when test="${empty sessionScope.user}">
+                            <a href="${contextPath}/login" class="btn btn-outline">Sign In</a>
+                            <a href="${contextPath}/register" class="btn btn-primary">Sign Up</a>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="user-dropdown">
+                                <a href="javascript:void(0)" class="user-menu-toggle">
+                                    <i class="fa-solid fa-user-circle"></i>
+                                    <span>${sessionScope.user.username}</span>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </a>
+                                <ul class="user-dropdown-menu">
+                                    <li><a href="${contextPath}/profile"><i class="fa-solid fa-user"></i> Profile</a></li>
+                                    <li><a href="${contextPath}/dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                                    <li><a href="${contextPath}/settings"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                                    <li><a href="${contextPath}/logout"><i class="fa-solid fa-sign-out-alt"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
@@ -80,8 +108,6 @@
         <div class="backdrop" id="menu-backdrop"></div>
     </nav>
 
-
-    <!-- JavaScript embedded at the end of the file -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Elements
@@ -90,6 +116,7 @@
         const navbarContent = document.getElementById('navbar-content');
         const backdrop = document.getElementById('menu-backdrop');
         const submenuParents = document.querySelectorAll('.has-submenu');
+        const userMenuToggle = document.querySelector('.user-menu-toggle');
         
         // Variables
         let lastScrollTop = 0;
@@ -131,6 +158,21 @@
                 }
             });
         });
+
+        // User dropdown menu toggle (if logged in)
+        if (userMenuToggle) {
+            userMenuToggle.addEventListener('click', function() {
+                this.parentNode.classList.toggle('active');
+            });
+            
+            // Close user menu when clicking outside
+            document.addEventListener('click', function(e) {
+                const userDropdown = document.querySelector('.user-dropdown');
+                if (userDropdown && !userDropdown.contains(e.target)) {
+                    userDropdown.classList.remove('active');
+                }
+            });
+        }
         
         // Sticky navbar on scroll
         window.addEventListener('scroll', function() {
