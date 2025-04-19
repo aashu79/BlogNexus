@@ -5,6 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import service.LoginService;
+import utils.RedirectionUtil;
+
 import java.io.IOException;
 
 /**
@@ -12,6 +15,10 @@ import java.io.IOException;
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/login" })
 public class LoginController extends HttpServlet {
+	
+	private static LoginService loginService;
+    private static RedirectionUtil redirectionUtil;
+
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -19,7 +26,9 @@ public class LoginController extends HttpServlet {
 	 */
 	public LoginController() {
 		super();
-		// TODO Auto-generated constructor stub
+		loginService = new LoginService();
+        redirectionUtil = new RedirectionUtil();
+
 	}
 
 	/**
@@ -38,8 +47,12 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+			loginService.authenticateUser(request, response);
+		} catch (Exception e) {
+			System.err.println(e);
+			redirectionUtil.redirectWithMessage(request, response, "login.jsp", "error","Something went wrong!");
+		}
 	}
 
 }

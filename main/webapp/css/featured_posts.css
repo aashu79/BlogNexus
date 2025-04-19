@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+
+/* Featured Posts Section Styles */
+.featured-posts {
+    background-color: var(--bg-light);
+}
+
+.featured-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.post-card {
+    height: 100%;
+}
+
+/* Simple responsive adjustments */
+@media (max-width: 992px) {
+    .featured-posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .featured-posts-grid {
+        grid-template-columns: 1fr;
+    }
+}

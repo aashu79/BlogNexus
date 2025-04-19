@@ -4,7 +4,7 @@
   --primary: #3a86ff;         /* Vibrant blue */
   --primary-dark: #2667cc;    /* Darker blue */
   --primary-light: #6ca0ff;   /* Lighter blue */
-  --primary-bg: #f0rgb(215, 248, 205)    /* Very light blue background */
+  --primary-bg: #f0f7ff;      /* Very light blue background - fixed the syntax error here */
   --accent: #ff9e6d;          /* Soft coral accent */
   --text-dark: #1a2c42;       /* Deep navy for text */
   --text-medium: #4f6380;     /* Medium slate for secondary text */
@@ -415,6 +415,8 @@ body {
   transform: rotate(-45deg);
   background-color: var(--primary);
 }
+
+
 
 /* Responsive styles */
 @media (max-width: 1200px) {
