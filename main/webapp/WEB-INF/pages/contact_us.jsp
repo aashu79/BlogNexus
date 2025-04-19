@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
   <title>Contact Us</title>
-  <link rel="stylesheet" href="css/contact_us.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact_us.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -19,7 +19,7 @@
       <div class="contact-info">
         <div class="contact-item">
           <i class="fa-solid fa-phone"></i>
-          <span class="text">+1-234-567-890</span>
+          <span class="text">+2-347-567-389</span>
         </div>
         <div class="contact-item">
           <i class="fa-solid fa-envelope"></i>
@@ -37,10 +37,6 @@
       </form>
     </div>
   </div>
-   <jsp:include page="../components/footer.jsp" />
+    <jsp:include page="../components/footer.jsp" />
 </body>
 </html>
-
-
-
-    
