@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <c:set var="contextPath" value="${pageContext.request.contextPath}" scope="application"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login to BlogNexus</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Satisfy&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+    <link rel="stylesheet" href="${contextPath}/css/login.css">
 </head>
 <body>
 <jsp:include page="../components/fontawesome.jsp"/>
+            <jsp:include page="../components/message_handler.jsp"/>
 
     <div class="page-container">
         <!-- Left section with illustrations -->
@@ -83,9 +86,8 @@
                 <h1>Welcome Back</h1>
                 <p>Sign in to continue to your account</p>
             </div>
-            <jsp:include page="../components/message_handler.jsp"/>
 
-            <form action="loginProcess.jsp" method="post">
+            <form action="${contextPath}/login" method="post">
                 <div class="form-field">
                     <div class="input-with-icon">
                         <input type="text" id="email" name="email" placeholder="Email Address" required>
@@ -109,13 +111,13 @@
                         <div class="checkbox-custom"></div>
                         <span>Remember me</span>
                     </label>
-                    <a href="forgot-password.jsp" class="forgot-password">Forgot password?</a>
+                    <a href="${contextPath}/auth/forgot-password" class="forgot-password">Forgot password?</a>
                 </div>
                 
                 <button type="submit" class="btn submit-btn">Sign In</button>
                 
                 <div class="form-footer">
-                    <p>Don't have an account? <a href="register.jsp">Sign up</a></p>
+                    <p>Don't have an account? <a href="${contextPath}/auth/register">Sign up</a></p>
                 </div>
             </form>
         </div>

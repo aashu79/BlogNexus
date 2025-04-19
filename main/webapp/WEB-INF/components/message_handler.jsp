@@ -9,43 +9,41 @@
   top: 20px;
   right: 20px;
   z-index: 9999;
-  width: 300px;
+  width: 280px;
 }
 
 .toast-message {
   background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
   margin-bottom: 10px;
-  overflow: hidden;
-  transform: translateX(100%);
-  opacity: 0;
-  animation: slide-in 0.3s forwards;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: fade-in 0.3s ease;
 }
 
 .toast-message.hide {
-  animation: slide-out 0.3s forwards;
+  animation: fade-out 0.3s ease forwards;
+}
+
+.toast-success {
+  border-left: 3px solid #4CAF50;
+}
+
+.toast-error {
+  border-left: 3px solid #F44336;
 }
 
 .toast-content {
   display: flex;
   align-items: center;
-  padding: 12px 15px;
-}
-
-.toast-success {
-  border-left: 4px solid #4CAF50;
-}
-
-.toast-error {
-  border-left: 4px solid #F44336;
 }
 
 .toast-icon {
-  margin-right: 12px;
-  font-size: 18px;
-  width: 20px;
-  text-align: center;
+  margin-right: 10px;
+  font-size: 16px;
 }
 
 .toast-success .toast-icon {
@@ -57,7 +55,6 @@
 }
 
 .toast-message-text {
-  flex-grow: 1;
   font-family: Arial, sans-serif;
   font-size: 14px;
 }
@@ -65,54 +62,32 @@
 .toast-close {
   background: none;
   border: none;
-  color: #888;
+  color: #999;
   cursor: pointer;
-  font-size: 16px;
-  margin-left: 10px;
+  font-size: 14px;
   padding: 0;
+  margin-left: 8px;
 }
 
 .toast-close:hover {
   color: #333;
 }
 
-.toast-progress {
-  height: 3px;
-  width: 100%;
-  background-color: #e0e0e0;
-}
-
-.toast-progress-bar {
-  height: 100%;
-  width: 100%;
-  animation: progress 5s linear forwards;
-}
-
-.toast-success .toast-progress-bar {
-  background-color: #4CAF50;
-}
-
-.toast-error .toast-progress-bar {
-  background-color: #F44336;
-}
-
-@keyframes slide-in {
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slide-out {
-  to {
-    transform: translateX(100%);
+@keyframes fade-in {
+  from {
     opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@keyframes progress {
+@keyframes fade-out {
   to {
-    width: 0;
+    opacity: 0;
+    transform: translateY(-10px);
   }
 }
 </style>
@@ -124,7 +99,7 @@
 <div class="toast-container">
   <%-- Check for success message in both request and session scopes --%>
   <c:if test="${not empty success || not empty sessionScope.success}">
-    <div id="successMessage" class="toast-message toast-success" data-message-type="success" data-message-scope="${not empty success ? 'request' : 'session'}">
+    <div id="successMessage" class="toast-message toast-success" data-message-scope="${not empty success ? 'request' : 'session'}">
       <div class="toast-content">
         <div class="toast-icon">
           <i class="fas fa-check-circle"></i>
@@ -132,19 +107,16 @@
         <div class="toast-message-text">
           <c:out value="${not empty success ? success : sessionScope.success}" />
         </div>
-        <button class="toast-close" onclick="closeToast('successMessage')" aria-label="Close">
-          <i class="fas fa-times"></i>
-        </button>
       </div>
-      <div class="toast-progress">
-        <div class="toast-progress-bar"></div>
-      </div>
+      <button class="toast-close" onclick="closeToast('successMessage')" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
     </div>
   </c:if>
 
   <%-- Check for error message in both request and session scopes --%>
   <c:if test="${not empty error || not empty sessionScope.error}">
-    <div id="errorMessage" class="toast-message toast-error" data-message-type="error" data-message-scope="${not empty error ? 'request' : 'session'}">
+    <div id="errorMessage" class="toast-message toast-error" data-message-scope="${not empty error ? 'request' : 'session'}">
       <div class="toast-content">
         <div class="toast-icon">
           <i class="fas fa-exclamation-circle"></i>
@@ -152,13 +124,10 @@
         <div class="toast-message-text">
           <c:out value="${not empty error ? error : sessionScope.error}" />
         </div>
-        <button class="toast-close" onclick="closeToast('errorMessage')" aria-label="Close">
-          <i class="fas fa-times"></i>
-        </button>
       </div>
-      <div class="toast-progress">
-        <div class="toast-progress-bar"></div>
-      </div>
+      <button class="toast-close" onclick="closeToast('errorMessage')" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
     </div>
   </c:if>
 </div>
@@ -168,15 +137,9 @@ function closeToast(id) {
   const toast = document.getElementById(id);
   if (toast) {
     toast.classList.add('hide');
-    
-    // Store the scope and type for cleanup
-    const messageType = toast.getAttribute('data-message-type');
-    const messageScope = toast.getAttribute('data-message-scope');
-    
     setTimeout(() => {
       toast.remove();
       
-      // Remove attribute based on scope and type
       <% 
       // Clean up both request and session attributes
       if (request.getAttribute("success") != null) {
@@ -196,7 +159,7 @@ function closeToast(id) {
   }
 }
 
-// Auto-dismiss after 5 seconds
+// Auto-dismiss after 4 seconds
 document.addEventListener('DOMContentLoaded', function() {
   const toasts = document.querySelectorAll('.toast-message');
   toasts.forEach(toast => {
@@ -204,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (toast && toast.id) {
         closeToast(toast.id);
       }
-    }, 5000);
+    }, 4000);
   });
 });
 </script>

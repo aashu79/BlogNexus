@@ -19,7 +19,7 @@ import utils.ValidationUtils;
 
 public class LoginService {
 
-    private Connection DbConnection;
+    private Connection dbConnection;
     private RedirectionUtil redirectionUtil;
     private PasswordUtil passwordUtil;
 
@@ -32,7 +32,7 @@ public class LoginService {
         
         try {
             Connection dbConnection = DbConfig.getDbConnection();
-            this.DbConnection = dbConnection;
+            this.dbConnection = dbConnection;
         } catch (Exception e) {
             System.err.println("Database connection error: " + e.getMessage());
             e.printStackTrace();
@@ -47,7 +47,7 @@ public class LoginService {
      * @throws ServletException If request processing fails
      */
     public void authenticateUser(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        if (DbConnection == null) {
+        if (dbConnection == null) {
             redirectionUtil.redirectWithMessage(req, res, "login.jsp", "error", "No database connection");
             return;
         }
@@ -65,7 +65,7 @@ public class LoginService {
         // Check if user exists and password is correct
         String query = "SELECT * FROM user WHERE email = ?";
         
-        try (PreparedStatement stmt = DbConnection.prepareStatement(query)) {
+        try (PreparedStatement stmt = dbConnection.prepareStatement(query)) {
             stmt.setString(1, email);
             
             try (ResultSet rs = stmt.executeQuery()) {
@@ -94,7 +94,7 @@ public class LoginService {
                         if ("admin".equals(user.getUserRole())) {
                             redirectionUtil.redirectWithMessage(req, res, "admin/dashboard.jsp", "success", "Welcome Admin!");
                         } else {
-                            redirectionUtil.redirectWithMessage(req, res, "dashboard.jsp", "success", "Login successful!");
+                            redirectionUtil.urlRedirectWithMessage(req, res, "/", "success", "Login successful!");
                         }
                     } else {
                         redirectionUtil.redirectWithMessage(req, res, "login.jsp", "error", "Invalid email or password");
