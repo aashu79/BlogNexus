@@ -170,18 +170,19 @@ main {
 }
 
 .about h2 {
-    background-color: rgba(92, 160, 133, 0.8);
+    background-color:white;
     text-align: center;
-    color: var(--bg-white);
+    color: var(--text-medium);
     padding: 1rem 1.5rem;
     border-radius: 8px;
-    
+    font: 'DM Sans', sans-serif;
+    font-size: 2.2rem;
   
 }
 
 .about h2:hover {
     transform: scale(1.03);
-    background-color: rgba(92, 160, 133, 1);
+    /*background-color: rgba(92, 160, 133, 1);*/
 }
 
 .team-section {
@@ -238,6 +239,8 @@ main {
 .company-section h2 {
     text-align: center;
     transition: color var(--transition-medium);
+    font-size: 2.2rem;
+    color:var(--text-medium);
 }
 
 .company-section h2:hover {
@@ -350,7 +353,6 @@ main {
     animation: pulse 1.5s infinite;
 }
 
-/* Animations */
 
     /* Milestone Tracker Addition for Company History */
 .milestone-tracker {
@@ -447,7 +449,8 @@ main {
 }
 
 .join-story {
-    display: flex;
+    text-align: justify;
+    flex-direction: columnns;
     align-items: center;
     justify-content: center;
     margin-top: 1.5rem;
@@ -461,7 +464,7 @@ main {
     margin: 0;
 }
 
-.mini-circle {
+.circle-mini {
     width: 30px;
     height: 30px;
 }

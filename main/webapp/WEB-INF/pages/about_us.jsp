@@ -19,16 +19,16 @@ At Blog Nexus, we believe in the power of words to inspire, educate, and transfo
         </section>
 
         <section class="team-section">
-            <h2>Our Team</h2>
+            <h2>OUR TEAM</h2>
             <div class="team-members">
                 <div class="team-member">
                     <img src="resources/images/image1.jpg" alt="Team Member 1">
-                    <h3>Ashu </h3>
+                    <h3>Ashu Kumar Shah</h3>
                     <p>CEO</p>
                 </div>
                 <div class="team-member">
                     <img src="resources/images/image1.jpg" alt="Team Member 2">
-                    <h3>Ayush</h3>
+                    <h3>Ayush Bhattarai</h3>
                     <p>Developer</p>
                 </div>
                 <div class="team-member">
@@ -38,12 +38,12 @@ At Blog Nexus, we believe in the power of words to inspire, educate, and transfo
                 </div>
                 <div class="team-member">
                     <img src="resources/images/image1.jpg" alt="Team Member 4">
-                    <h3>Bishal</h3>
+                    <h3>Bishal Kumar Rajak</h3>
                     <p>Customer Support</p>
                 </div>
                 <div class="team-member">
                     <img src="resources/images/image1.jpg" alt="Team Member 5">
-                    <h3>Kamakshi</h3>
+                    <h3>Kamakshi Gupta</h3>
                     <p>Software engineer</p>
                 </div>
                 
@@ -52,7 +52,7 @@ At Blog Nexus, we believe in the power of words to inspire, educate, and transfo
         </section>
 
         <section class="company-section">
-            <h2>company history</h2>
+            <h2>COMPANY HISTORY</h2>
             <ul>
                 <div class="milestone-tracker">
   <h3>Our Growth Journey</h3>
@@ -80,7 +80,13 @@ At Blog Nexus, we believe in the power of words to inspire, educate, and transfo
     <div class="milestone-line"></div>
   </div>
   <div class="join-story">
+  <h3>OUR STORY</h3>
+  <div class="story-paragraph">
+  <p>BlogNexus emerged in early 2023 from a series of virtual brainstorming sessions between three digital professionals who found themselves frustrated by the fragmented nature of online content. What began as a shared document of ideas quickly transformed into a small, collaborative platform launched in Kathmandu, with the mission to create a central hub where diverse perspectives could intersect and flourish.</p>
+   <p>The founding team's varied backgrounds in technology, content strategy, and data analysis shaped BlogNexus's unique approach to digital publishing. Within months of launch, the site gained attention for its cross-disciplinary insights and thoughtful analysis, attracting readers looking for deeper connections between emerging trends. Today, BlogNexus continues to grow its community of contributors and readers while staying true to its original vision: creating meaningful connections at the intersection of ideas.</p>
     <p>Be part of our journey</p>
+  
+  </div> 
     <div class="circle-mini"></div>
   </div>
 </div>                
