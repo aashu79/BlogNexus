@@ -11,22 +11,22 @@
 
         <div class="featured-posts-grid">
             <div class="post-card">
-                <jsp:include page="../components/BlogCard.jsp" />
+                <jsp:include page="../components/blog_card.jsp" />
             </div>
             <div class="post-card">
-                <jsp:include page="../components/BlogCard.jsp" />
+                <jsp:include page="../components/blog_card.jsp" />
             </div>
             <div class="post-card">
-                <jsp:include page="../components/BlogCard.jsp" />
+                <jsp:include page="../components/blog_card.jsp" />
             </div>
             <div class="post-card">
-                <jsp:include page="../components/BlogCard.jsp" />
+                <jsp:include page="../components/blog_card.jsp" />
             </div>
             <div class="post-card">
-                <jsp:include page="../components/BlogCard.jsp" />
+                <jsp:include page="../components/blog_card.jsp" />
             </div>
             <div class="post-card">
-                <jsp:include page="../components/BlogCard.jsp" />
+                <jsp:include page="../components/blog_card.jsp" />
             </div>
         </div>
     </div>
