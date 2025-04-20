@@ -272,9 +272,10 @@
 				            <i class="fa-solid fa-chevron-down"></i>
 				        </div>
 				        <ul class="user-dropdown-menu">
-				            <li><a href="${contextPath}/dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
-				            <li><a href="${contextPath}/profile"><i class="fa-solid fa-user"></i> My Profile</a></li>
-				            <li><a href="${contextPath}/create-post"><i class="fa-solid fa-pen-to-square"></i> Create Blog</a></li>
+				    
+				            <li><a href="${contextPath}/user/profile"><i class="fa-solid fa-user"></i> My Profile</a></li>
+				                    <li><a href="${contextPath}/user/favourite"><i class="fa fa-heart"></i> Favourites</a></li>
+				            <li><a href="${contextPath}/user/blog/create"><i class="fa-solid fa-pen-to-square"></i> Create Blog</a></li>
 				            
 				            <!-- Admin section (only visible for admin users) -->
 				            <li class="divider" style="display: ${isAdmin ? 'block' : 'none'}"></li>

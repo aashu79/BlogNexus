@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Create New Blog - BlogNexus</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/blog_creation.css">
 </head>
 <body>
+<jsp:include page="../components/navbar.jsp"></jsp:include>
     <div class="blog-container">
         <h1>Create a New Blog Post</h1>
 
@@ -59,5 +59,6 @@
             <button type="submit" class="submit-btn">Publish Blog</button>
         </form>
     </div>
+    <jsp:include page="../components/footer.jsp"></jsp:include>
 </body>
 </html>

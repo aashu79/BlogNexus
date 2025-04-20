@@ -8,16 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class Blog_creationController
+ * Servlet implementation class Favourite
  */
-@WebServlet(asyncSupported = true, urlPatterns = {"/user/blog/create"})
-public class Blog_creationController extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/user/favourite" })
+public class Favourite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Blog_creationController() {
+    public Favourite() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,8 @@ public class Blog_creationController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/pages/blog_creation.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/user_favourite.jsp").forward(request, response);
+
 	}
 
 	/**
