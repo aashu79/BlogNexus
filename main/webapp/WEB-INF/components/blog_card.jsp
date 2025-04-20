@@ -14,7 +14,7 @@
 <div class="blog-card">
 
     <div class="blog-card-image">
-        <a href="blog-detail.jsp?id=${param.blog_id}">
+        <a href="blog-detail?id=${param.blog_id}">
             <img src="${param.thumbnail}" alt="${param.title}" />
         </a>
         <span class="blog-card-category">${param.genre}</span>
@@ -25,7 +25,7 @@
             <span class="blog-card-read-time">${param.readTime}</span>
         </div>
         <h3 class="blog-card-title">
-            <a href="blog-detail.jsp?id=${param.blog_id}">${param.title}</a>
+            <a href="blog-detail?id=${param.blog_id}">${param.title}</a>
         </h3>
         <p class="blog-card-excerpt">${param.content}</p>
         <div class="blog-card-author">
