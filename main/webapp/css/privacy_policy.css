@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+/* Reuse terms.css styles with minor adjustments */
+.policy-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+h1 {
+  color: #2c662d;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.effective-date {
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.policy-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: #f9fff9;
+  border-left: 4px solid #4CAF50;
+  border-radius: 4px;
+}
+
+.policy-section h2 {
+  color: #2c662d;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.policy-section p {
+  margin-bottom: 1rem;
+  color: #444;
+  line-height: 1.7;
+}
+
+.policy-list {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.policy-list li {
+  margin: 0.8rem 0;
+  color: #555;
+}
+
+.policy-section a {
+  color: #388e3c;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.policy-section a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .policy-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .policy-section {
+    padding: 1rem;
+  }
+
+  .policy-section h2 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .policy-container {
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  .policy-list {
+    padding-left: 1.5rem;
+  }
+}
