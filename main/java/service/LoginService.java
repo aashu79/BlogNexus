@@ -92,7 +92,7 @@ public class LoginService {
                         
                         // Redirect based on role
                         if ("admin".equals(user.getUserRole())) {
-                            redirectionUtil.redirectWithMessage(req, res, "admin/dashboard.jsp", "success", "Welcome Admin!");
+                            redirectionUtil.urlRedirectWithMessage(req, res, "/admin/dashboard", "success", "Welcome Admin!");
                         } else {
                             redirectionUtil.urlRedirectWithMessage(req, res, "/", "success", "Login successful!");
                         }

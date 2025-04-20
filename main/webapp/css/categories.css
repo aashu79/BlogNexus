@@ -1,10 +1,14 @@
 @charset "UTF-8";
 
 
+.container{
+	padding: 50px
+}
+
 /* Categories Section Styles */
 .categories-section {
     background-color: var(--primary-bg);
-    padding: 6rem 0;
+    padding: 50px 0px;
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -43,6 +47,7 @@
     align-items: center;
     box-shadow: var(--shadow-sm);
     height: 100%;
+    text-decoration: none;
 }
 
 .category-card:hover {
