@@ -1,0 +1,276 @@
+@charset "UTF-8";
+
+@import url("admin_navbar.css");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Sans', sans-serif;
+}
+
+body {
+    background-color: #f5f7f9;
+    color: #333;
+    line-height: 1.5;
+    padding-top: 70px;
+}
+
+.content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #2a2a2a;
+}
+
+/* Simple Card */
+.simple-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+/* Form Layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 5px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+}
+
+/* Input Fields */
+.input-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-field i {
+    position: absolute;
+    left: 10px;
+    color: #777;
+    font-size: 14px;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 10px 10px 10px 32px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.input-field input:focus {
+    outline: none;
+    border-color: #2a9d8f;
+}
+
+/* Toggle Password Button (Fixed) */
+.toggle-btn {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #777;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-btn:hover {
+    color: #2a9d8f;
+}
+
+.toggle-btn:focus {
+    outline: none;
+}
+
+/* Select Fields */
+.select-field {
+    position: relative;
+}
+
+.select-field select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    appearance: none;
+    background-color: white;
+    font-size: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23777' viewBox='0 0 16 16'><path d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
+.select-field select:focus {
+    outline: none;
+    border-color: #2a9d8f;
+}
+
+/* Upload Section */
+.upload-section {
+    margin: 20px 0;
+}
+
+.upload-section label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+}
+
+.upload-container {
+    max-width: 200px;
+}
+
+.upload-box {
+    border: 1px dashed #ccc;
+    border-radius: 6px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 10px;
+    transition: all 0.2s;
+}
+
+.upload-box:hover {
+    border-color: #2a9d8f;
+    background-color: #f0f7f6;
+}
+
+.upload-box i {
+    font-size: 24px;
+    color: #2a9d8f;
+    margin-bottom: 8px;
+}
+
+.upload-box span {
+    font-size: 13px;
+    color: #666;
+}
+
+.preview-box {
+    position: relative;
+    height: 120px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.preview-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    color: #e53e3e;
+    font-weight: bold;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.cancel-btn {
+    padding: 8px 16px;
+    background: #f1f1f1;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cancel-btn:hover {
+    background: #e5e5e5;
+}
+
+.submit-btn {
+    padding: 8px 16px;
+    background: #2a9d8f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #248b7e;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+    
+    .cancel-btn, .submit-btn {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .upload-container {
+        max-width: 100%;
+    }
+}

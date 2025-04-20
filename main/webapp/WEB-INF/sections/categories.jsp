@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/categories.css">
 
 <section class="categories-section">
-    <div class="container">
+    <div class="container" >
         <div class="section-header">
             <h2 class="section-title">Explore Categories</h2>
             <p class="section-subtitle">Discover content tailored to your interests or explore new topics.</p>
