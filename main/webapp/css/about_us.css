@@ -1,0 +1,536 @@
+@charset "UTF-8";
+
+:root {
+    /* BlogNexus color palette */
+    --primary: #4A8E71;          /* Green from BlogNexus */
+    --primary-dark: #3A7C5F;     /* Darker green */
+    --primary-light: #5CA085;    /* Lighter green */
+    --primary-bg: #EFF2F1;       /* Very light mint/gray background */
+    --accent: #63A599;           /* Teal accent */
+    --accent-secondary: #E2B052; /* Golden accent */
+    --text-dark: #3A4F4C;        /* Dark slate for headings */
+    --text-medium: #5A6E6B;      /* Medium slate for text */
+    --text-light: #8B9996;       /* Light slate for tertiary text */
+    --bg-white: #ffffff;         /* Pure white */
+    --bg-light: #F7F9F9;         /* Off-white for cards */
+    --border: #E2E8E6;           /* Soft border color */
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(58, 79, 76, 0.05);
+    --shadow-md: 0 8px 20px rgba(58, 79, 76, 0.08);
+    --shadow-lg: 0 16px 32px rgba(58, 79, 76, 0.1);
+
+    /* Typography */
+    --font-main: 'DM Sans', sans-serif;
+    --font-headings: 'Montserrat', sans-serif;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* Base Styles */
+body {
+    font-family: var(--font-main);
+    color: var(--text-dark);
+    line-height: 1.6;
+    background-color: var(--primary-bg);
+    margin: 0;
+    padding: 0;
+    transition: background-color var(--transition-medium);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-headings);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-dark);
+    margin-top: 0;
+    position: relative;
+    transition: transform var(--transition-medium), color var(--transition-medium);
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--accent);
+    transition: width var(--transition-medium);
+}
+
+h2:hover::after {
+    width: 100%;
+}
+
+/* Header & Navigation */
+header {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--bg-white);
+    box-shadow: var(--shadow-sm);
+    transition: padding var(--transition-medium), background-color var(--transition-medium);
+}
+
+header:hover {
+    padding: 1.2rem 1.5rem;
+    background-color: var(--bg-light);
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav a {
+    color: var(--text-medium);
+    text-decoration: none;
+    margin: 0 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: color var(--transition-medium);
+}
+
+header nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(74, 142, 113, 0.1);
+    transition: left var(--transition-medium);
+    z-index: -1;
+}
+
+header nav a:hover {
+    color: var(--primary);
+}
+
+header nav a:hover::before {
+    left: 0;
+}
+
+main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* Sections */
+.about,
+.team-section,
+.company-section {
+    margin-bottom: 3rem;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.about {
+    background-color: var(--primary);
+    color: var(--bg-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.about::before {
+    content: ''; 
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+    pointer-events: none;
+}
+
+.about:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.about:hover::before {
+    opacity: 1;
+    animation: ripple 2s infinite;
+}
+
+.about h2 {
+    background-color: rgba(92, 160, 133, 0.8);
+    text-align: center;
+    color: var(--bg-white);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    
+  
+}
+
+.about h2:hover {
+    transform: scale(1.03);
+    background-color: rgba(92, 160, 133, 1);
+}
+
+.team-section {
+    background-color: var(--bg-white);
+    position: relative;
+}
+
+.team-section:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.team-section div {
+    background-color: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    /*transition: background-color var(--transition-medium), transform var(--transition-medium);*/
+}
+
+.team-section div:hover {
+    background-color: var(--primary-bg);
+    transform: translateY(-3px);
+}
+
+.team-section h2 {
+    font-size: 2.2rem;
+    text-align: center;
+    color:var(--text-medium);
+}
+
+.team-section div h3 {
+    background-color: var(--primary-light);
+    padding: 0.75rem;
+    border-radius: 4px;
+    color: var(--bg-white);
+    transition: background-color var(--transition-medium), transform var(--transition-medium);
+    cursor: pointer;
+}
+
+.team-section div h3:hover {
+    background-color: var(--primary);
+    transform: translateX(10px);
+}
+
+.company-section {
+    background-color: var(--bg-white);
+}
+
+.company-section:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.company-section h2 {
+    text-align: center;
+    transition: color var(--transition-medium);
+}
+
+.company-section h2:hover {
+    color: var(--primary);
+}
+
+/* Team Members */
+.team-members {
+    font-family: var(--font-main);
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.team-member {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    transition: transform var(--transition-medium);
+    position: relative;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+}
+
+.team-member div {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.75rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    background-color: var(--primary);
+    color: var(--bg-white);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.team-member div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.3), rgba(255,255,255,0));
+    transition: left 0.7s ease;
+}
+
+.team-member div:hover {
+    background-color: var(--primary-dark);
+    box-shadow: var(--shadow-md);
+}
+
+.team-member div:hover::before {
+    left: 100%;
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    transition: all 0.4s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.team-member:hover img {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: var(--shadow-md);
+    border: 3px solid var(--accent);
+}
+
+.team-member::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    width: 30px;
+    height: 3px;
+    background-color: var(--primary);
+    transition: transform var(--transition-medium);
+}
+
+.team-member:hover::after {
+    transform: translateX(-50%) scale(1);
+}
+
+/* Circle */
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    transition: transform var(--transition-medium), background-color var(--transition-medium), box-shadow var(--transition-medium);
+    cursor: pointer;
+}
+
+.circle:hover {
+    transform: scale(1.1);
+    background-color: var(--accent);
+    box-shadow: 0 0 20px rgba(99, 165, 153, 0.7);
+    animation: pulse 1.5s infinite;
+}
+
+/* Animations */
+
+    /* Milestone Tracker Addition for Company History */
+.milestone-tracker {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background-color: var(--bg-light);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.milestone-tracker:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.milestone-tracker h3 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.milestone-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 2rem 0;
+    padding: 0 1rem;
+}
+
+.milestone-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary), var(--accent), var(--accent-secondary));
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+.milestone-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    width: 25%;
+}
+
+.milestone-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--bg-white);
+    border: 2px solid var(--border);
+    margin: 0.5rem 0;
+    transition: all var(--transition-medium);
+}
+
+.milestone-dot.active {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    transform: scale(1.2);
+}
+
+.milestone-dot.current {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.2);
+    animation: pulse 1.5s infinite;
+}
+
+.milestone-date {
+    font-weight: bold;
+    color: var(--text-medium);
+}
+
+.milestone-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-align: center;
+    transition: color var(--transition-medium);
+}
+
+.milestone-item:hover .milestone-label {
+    color: var(--primary);
+}
+
+.milestone-item:hover .milestone-dot:not(.active):not(.current) {
+    transform: scale(1.2);
+    border-color: var(--accent-secondary);
+}
+
+.join-story {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5rem;
+    gap: 1rem;
+}
+
+.join-story p {
+    color: var(--text-medium);
+    font-weight: 500;
+    font-style: italic;
+    margin: 0;
+}
+
+.mini-circle {
+    width: 30px;
+    height: 30px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .milestone-container {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+    
+    .milestone-item {
+        width: 50%;
+    }
+    
+    .milestone-line {
+        display: none;
+    }
+}
+@keyframes ripple {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-10%, -10%);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 0.8rem 1rem;
+    }
+    
+    header:hover {
+        padding: 1rem 1rem;
+    }
+    
+    .team-members {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .about, .team-section, .company-section {
+        padding: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .team-member img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
