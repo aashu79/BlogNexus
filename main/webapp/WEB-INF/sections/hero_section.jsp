@@ -12,7 +12,7 @@
             </p>
             <div class="hero-actions">
                 <a href="#featured" class="btn btn-primary">Explore Articles <i class="fas fa-arrow-right"></i></a>
-                <a href="${pageContext.request.contextPath}/register.jsp" class="btn btn-outline">Become a Writer <i class="fas fa-pen"></i></a>
+                <a href="${pageContext.request.contextPath}/register" class="btn btn-outline">Become a Writer <i class="fas fa-pen"></i></a>
             </div>
             <div class="hero-stats">
                 <div class="stat-item">
@@ -31,15 +31,4 @@
         </div>
     </div>
 
-    <script>
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
 </section>

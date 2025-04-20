@@ -14,25 +14,25 @@
 <div class="blog-card">
 
     <div class="blog-card-image">
-        <a href="blog-detail.jsp">
-            <img src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=2676&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Nature landscape" />
+        <a href="blog-detail.jsp?id=${param.blog_id}">
+            <img src="${param.thumbnail}" alt="${param.title}" />
         </a>
-        <span class="blog-card-category">Nature</span>
+        <span class="blog-card-category">${param.genre}</span>
     </div>
     <div class="blog-card-content">
         <div class="blog-card-meta">
-            <span class="blog-card-date"><i class="far fa-clock"></i> April 14, 2025</span>
-            <span class="blog-card-read-time">5 min read</span>
+            <span class="blog-card-date"><i class="far fa-clock"></i> ${param.formattedDate}</span>
+            <span class="blog-card-read-time">${param.readTime}</span>
         </div>
         <h3 class="blog-card-title">
-            <a href="blog-detail.jsp">The Beauty of Natural Landscapes and Their Impact on Mental Wellness</a>
+            <a href="blog-detail.jsp?id=${param.blog_id}">${param.title}</a>
         </h3>
-        <p class="blog-card-excerpt">Exploring how spending time in nature can reduce stress, improve mood, and enhance overall mental health. Research shows even brief exposure to natural environments provides significant benefits.</p>
+        <p class="blog-card-excerpt">${param.content}</p>
         <div class="blog-card-author">
-            <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Aashu Sharma" class="author-avatar">
+            <img src="https://randomuser.me/api/portraits/men/${30 + param.blog_id}.jpg" alt="${param.authorName}" class="author-avatar">
             <div class="author-info">
-                <span class="author-name">Aashu Sharma</span>
-                <span class="author-role">Environmental Writer</span>
+                <span class="author-name">${param.authorName}</span>
+                <span class="author-role">${param.authorRole}</span>
             </div>
         </div>
     </div>
