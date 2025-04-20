@@ -231,7 +231,7 @@
                         </ul>
                     </li>
                     <li class="navbar-item ${currentPath eq '/featured' ? 'active' : ''}">
-                        <a href="${contextPath}/featured" class="navbar-link">Featured</a>
+                        <a href="#featured" class="navbar-link">Featured</a>
                     </li>
                     <li class="navbar-item ${currentPath eq '/about' ? 'active' : ''}">
                         <a href="${contextPath}/about" class="navbar-link">About</a>
