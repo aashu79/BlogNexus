@@ -1,0 +1,73 @@
+@charset "UTF-8";
+@import url("navbar.css");
+@import url("footer.css");
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    margin: 0;
+    padding: 40px;
+    background-color: #F9FAFB;
+}
+
+.blog-container {
+    max-width: 800px;
+    margin: auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #111827;
+}
+
+.form-group {
+    margin-bottom: 25px; /* Ensuring uniform spacing */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #F9FAFB;
+    color: #111827;
+}s
+
+.form-group textarea {
+    resize: vertical;
+    height: 180px;
+}
+
+.form-group input[type="file"] {
+    padding: 8px;
+}
+
+.submit-btn {
+    background-color: #22c55e;
+    color: white;
+    padding: 14px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.submit-btn:hover {
+    background-color: #bbb;;
+}
