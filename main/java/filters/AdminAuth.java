@@ -11,21 +11,23 @@ import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.UserModel;
 import utils.RedirectionUtil;
 
 import java.io.IOException;
 
 /**
- * Servlet Filter implementation class UserAuth
- * This filter protects all routes under /user/* and ensures only logged-in users can access them.
+ * Servlet Filter implementation class AdminAuth
+ * This filter protects all routes under /admin/* and ensures only users with admin role can access them.
  */
-@WebFilter("/user/*")
-public class UserAuth extends HttpFilter implements Filter {
-       RedirectionUtil redirectionUtil;
+@WebFilter("/admin/*")
+public class AdminAuth extends HttpFilter implements Filter {
+    RedirectionUtil redirectionUtil;
+    
     /**
      * @see HttpFilter#HttpFilter()
      */
-    public UserAuth() {
+    public AdminAuth() {
         super();
         this.redirectionUtil = new RedirectionUtil();
     }
@@ -39,7 +41,7 @@ public class UserAuth extends HttpFilter implements Filter {
 
     /**
      * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-     * Check if user is logged in, if not redirect to login page
+     * Check if user is logged in and has admin role, if not redirect with error message
      */
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) 
             throws IOException, ServletException {
@@ -50,24 +52,31 @@ public class UserAuth extends HttpFilter implements Filter {
         // Get the session, don't create one if it doesn't exist
         HttpSession session = req.getSession(false);
         
-        // Check if user is logged in
-        boolean isLoggedIn = false;
+        // Check if user is logged in and has admin role
+        boolean isAdmin = false;
+        
         if (session != null) {
             // Check if isLoggedIn attribute exists and is true
             Object loginStatus = session.getAttribute("isLoggedIn");
-            isLoggedIn = (loginStatus != null && (Boolean) loginStatus);
+            boolean isLoggedIn = (loginStatus != null && (Boolean) loginStatus);
+            
+            if (isLoggedIn) {
+                // Check if user has admin role
+                UserModel user = (UserModel) session.getAttribute("user");
+                if (user != null && "admin".equalsIgnoreCase(user.getUserRole())) {
+                    isAdmin = true;
+                }
+            }
         }
         
-        // If user is logged in, continue with the request
-        if (isLoggedIn) {
+        // If user is logged in and is an admin, continue with the request
+        if (isAdmin) {
             // Pass the request along the filter chain
             chain.doFilter(request, response);
         } else {
-        	redirectionUtil.urlRedirectWithMessage(request, response, "/login", "error","You are not authorized.");
-
-            
-            // Redirect to login page
-//            res.sendRedirect(req.getContextPath() + "/login.jsp");
+            // User not logged in or not an admin, redirect with error message
+            redirectionUtil.urlRedirectWithMessage(req, res, "/login", "error", 
+                "Access denied!");
         }
     }
 
