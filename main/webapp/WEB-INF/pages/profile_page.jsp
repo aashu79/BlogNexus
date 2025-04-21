@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="profile-actions">
-                    <a href="edit-profile.jsp" class="btn btn-primary">
+                    <a href="${pageContext.request.contextPath}/user/profile/update" class="btn btn-primary">
                         <i class="fas fa-pen"></i> Edit Profile
                     </a>
                 </div>
