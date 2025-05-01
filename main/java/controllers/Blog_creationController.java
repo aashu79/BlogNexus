@@ -1,41 +1,53 @@
 package controllers;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import service.BlogService;
+
 import java.io.IOException;
 
 /**
- * Servlet implementation class Blog_creationController
+ * Controller for blog creation.
  */
 @WebServlet(asyncSupported = true, urlPatterns = {"/user/blog/create"})
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024,     // 1MB
+    maxFileSize = 5 * 1024 * 1024,       // 5MB
+    maxRequestSize = 10 * 1024 * 1024    // 10MB
+)
 public class Blog_creationController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    private BlogService blogService;
        
     /**
-     * @see HttpServlet#HttpServlet()
+     * Initializes controller with BlogService.
      */
     public Blog_creationController() {
         super();
-        // TODO Auto-generated constructor stub
+        this.blogService = new BlogService();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/pages/blog_creation.jsp").forward(request, response);
-	}
+    /**
+     * Displays blog creation form.
+     * @param request HTTP request
+     * @param response HTTP response
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Display blog creation form
+        request.getRequestDispatcher("/WEB-INF/pages/blog_creation.jsp").forward(request, response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+    /**
+     * Processes blog creation form submission.
+     * @param request HTTP request with blog data
+     * @param response HTTP response
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Process the form submission to create a new blog
+        blogService.createBlog(request, response);
+    }
 }
