@@ -413,7 +413,7 @@ public class BlogService {
         
         String blogIdParam = req.getParameter("id");
         if (blogIdParam == null || blogIdParam.trim().isEmpty()) {
-            redirectionUtil.urlRedirectWithMessage(req, res, "/blogs", "error", "Blog ID is required");
+            redirectionUtil.urlRedirectWithMessage(req, res, "/admin/blogs", "error", "Blog ID is required");
             return;
         }
         
@@ -432,16 +432,16 @@ public class BlogService {
                 int result = stmt.executeUpdate();
                 
                 if (result > 0) {
-                    redirectionUtil.urlRedirectWithMessage(req, res, "/blogs", "success", "Blog deleted successfully");
+                    redirectionUtil.urlRedirectWithMessage(req, res, "/admin/blogs", "success", "Blog deleted successfully");
                 } else {
-                    redirectionUtil.urlRedirectWithMessage(req, res, "/blogs", "error", "Failed to delete blog");
+                    redirectionUtil.urlRedirectWithMessage(req, res, "/admin/blogs", "error", "Failed to delete blog");
                 }
             }
         } catch (NumberFormatException e) {
-            redirectionUtil.urlRedirectWithMessage(req, res, "/blogs", "error", "Invalid blog ID");
+            redirectionUtil.urlRedirectWithMessage(req, res, "/admin/blogs", "error", "Invalid blog ID");
         } catch (SQLException e) {
             System.err.println("Error deleting blog: " + e.getMessage());
-            redirectionUtil.urlRedirectWithMessage(req, res, "/blogs", "error", "Database error occurred");
+            redirectionUtil.urlRedirectWithMessage(req, res, "/admin/blogs", "error", "Database error occurred");
         }
     }
     
@@ -474,5 +474,89 @@ public class BlogService {
         }
         
         return false;
+    }
+    
+    /**
+     * Get all blogs as a list for admin display.
+     * @param query SQL query to execute
+     * @return List of blog models
+     */
+    public List<BlogModel> getAllBlogsForAdmin(String query) {
+        List<BlogModel> blogs = new ArrayList<>();
+        
+        try (PreparedStatement stmt = dbConnection.prepareStatement(query)) {
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    BlogModel blog = new BlogModel();
+                    blog.setBlogId(rs.getInt("blog_id"));
+                    blog.setTitle(rs.getString("title"));
+                    blog.setContent(rs.getString("content"));
+                    
+                    String thumbnailName = rs.getString("thumbnail");
+                    blog.setThumbnail(thumbnailName);
+                    blog.setThumbnailUrl(imageUtil.getThumbnailImageUrl(thumbnailName));
+                    
+                    String imageName = rs.getString("image");
+                    blog.setImage(imageName);
+                    blog.setImageUrl(imageUtil.getBlogImageUrl(imageName));
+                    
+                    blog.setGenre(rs.getString("genre"));
+                    blog.setCreatedBy(rs.getInt("created_by"));
+                    
+                    // Handle created_at carefully to avoid format issues
+                    String createdAtStr = rs.getString("created_at");
+                    if (createdAtStr != null && !createdAtStr.isEmpty()) {
+                        try {
+                            if (createdAtStr.contains("T")) {
+                                blog.setCreatedAt(LocalDateTime.parse(createdAtStr));
+                            } else {
+                                // Use formatter if not in ISO format
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                                blog.setCreatedAt(LocalDateTime.parse(createdAtStr, formatter));
+                            }
+                        } catch (Exception e) {
+                            // If date parsing fails, set to current time
+                            blog.setCreatedAt(LocalDateTime.now());
+                            System.err.println("Error parsing date: " + e.getMessage());
+                        }
+                    } else {
+                        blog.setCreatedAt(LocalDateTime.now());
+                    }
+                    
+                    blogs.add(blog);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error retrieving blogs: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return blogs;
+    }
+
+    /**
+  
+     * @param userId User ID to look up
+     * @return Full name of the user
+     */
+    public String getAuthorNameById(int userId) {
+        String fullName = "Unknown Author";
+        
+        String query = "SELECT first_name, last_name FROM user WHERE user_id = ?";
+        try (PreparedStatement stmt = dbConnection.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String firstName = rs.getString("first_name");
+                    String lastName = rs.getString("last_name");
+                    fullName = firstName + " " + lastName;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error getting author name: " + e.getMessage());
+        }
+        
+        return fullName;
     }
 }

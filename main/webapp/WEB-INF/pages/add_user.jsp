@@ -17,11 +17,17 @@
 
     <!-- Main Content -->
     <div class="content">
-        <h1 class="page-title">Add New User</h1>
+        <div class="dashboard-header">
+            <h1 class="page-title">Add New User</h1>
+            <div>
+                <p>Current Date and Time (UTC - YYYY-MM-DD HH:MM:SS formatted): ${currentDateTime}</p>
+                <p>Current User's Login: ${currentUser.firstName}</p>
+            </div>
+        </div>
         
         <!-- Simple Form Card -->
         <div class="simple-card">
-            <form action="${contextPath}/admin/users/create" method="post" enctype="multipart/form-data" id="createUserForm">                
+            <form action="${contextPath}/admin/users/add" method="post" enctype="multipart/form-data" id="createUserForm">                
                 <div class="form-grid">
                     <!-- Left Column -->
                     <div class="form-column">
@@ -200,6 +206,27 @@
                 if (password !== confirmPassword) {
                     e.preventDefault();
                     alert('Passwords do not match!');
+                }
+                
+                // Check password strength
+                if (password.length < 8) {
+                    e.preventDefault();
+                    alert('Password must be at least 8 characters long');
+                    return;
+                }
+                
+                let hasLetter = false;
+                let hasDigit = false;
+                
+                for (let i = 0; i < password.length; i++) {
+                    const char = password.charAt(i);
+                    if (/[a-zA-Z]/.test(char)) hasLetter = true;
+                    if (/[0-9]/.test(char)) hasDigit = true;
+                }
+                
+                if (!hasLetter || !hasDigit) {
+                    e.preventDefault();
+                    alert('Password must contain at least one letter and one number');
                 }
             });
         });
