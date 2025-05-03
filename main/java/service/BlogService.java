@@ -55,7 +55,7 @@ public class BlogService {
      */
     public void createBlog(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         if (dbConnection == null) {
-            redirectionUtil.redirectWithMessage(req, res, "create-blog.jsp", "error", "Database connection unavailable");
+            redirectionUtil.redirectWithMessage(req, res, "blog_creation.jsp", "error", "Database connection unavailable");
             return;
         }
 
@@ -74,19 +74,16 @@ public class BlogService {
         // Validate inputs
         ValidationResult validation = validateBlogInputs(title, content, genre, thumbnail, image);
         if (!validation.isSuccess()) {
-            redirectionUtil.redirectWithMessage(req, res, "create-blog.jsp", "error", validation.getMessage());
+            redirectionUtil.redirectWithMessage(req, res, "blog_creation.jsp", "error", validation.getMessage());
             return;
         }
         
-        // Process images
-        String thumbnailName = imageUtil.getImageNameFromPart(thumbnail);
-        String imageName = imageUtil.getImageNameFromPart(image);
+        // Upload images with the specialized methods
+        String thumbnailName = imageUtil.uploadThumbnailImage(thumbnail);
+        String imageName = imageUtil.uploadBlogImage(image);
         
-        boolean thumbnailUploaded = imageUtil.uploadImage(thumbnail, "rootPath", "blogThumbnails");
-        boolean imageUploaded = imageUtil.uploadImage(image, "rootPath", "blogImages");
-        
-        if (!thumbnailUploaded || !imageUploaded) {
-            redirectionUtil.redirectWithMessage(req, res, "create-blog.jsp", "error", "Failed to upload images");
+        if (thumbnailName == null || imageName == null) {
+            redirectionUtil.redirectWithMessage(req, res, "blog_creation.jsp", "error", "Failed to upload images");
             return;
         }
         
@@ -107,11 +104,11 @@ public class BlogService {
             if (result > 0) {
                 redirectionUtil.urlRedirectWithMessage(req, res, "/blogs", "success", "Blog published successfully!");
             } else {
-                redirectionUtil.redirectWithMessage(req, res, "create-blog.jsp", "error", "Failed to publish blog");
+                redirectionUtil.redirectWithMessage(req, res, "blog_creation.jsp", "error", "Failed to publish blog");
             }
         } catch (SQLException e) {
             System.err.println("Error creating blog: " + e.getMessage());
-            redirectionUtil.redirectWithMessage(req, res, "create-blog.jsp", "error", "Database error occurred");
+            redirectionUtil.redirectWithMessage(req, res, "blog_creation.jsp", "error", "Database error occurred");
         }
     }
     
@@ -176,8 +173,15 @@ public class BlogService {
                     blog.setBlogId(rs.getInt("blog_id"));
                     blog.setTitle(rs.getString("title"));
                     blog.setContent(rs.getString("content"));
-                    blog.setThumbnail(rs.getString("thumbnail"));
-                    blog.setImage(rs.getString("image"));
+                    
+                    String thumbnailName = rs.getString("thumbnail");
+                    blog.setThumbnail(thumbnailName);
+                    blog.setThumbnailUrl(imageUtil.getThumbnailImageUrl(thumbnailName));
+                    
+                    String imageName = rs.getString("image");
+                    blog.setImage(imageName);
+                    blog.setImageUrl(imageUtil.getBlogImageUrl(imageName));
+                    
                     blog.setGenre(rs.getString("genre"));
                     blog.setCreatedBy(rs.getInt("created_by"));
                     blog.setCreatedAt(LocalDateTime.parse(rs.getString("created_at")));
@@ -194,6 +198,7 @@ public class BlogService {
             redirectionUtil.redirectWithMessage(req, res, "error.jsp", "error", "Failed to retrieve blogs");
         }
     }
+    
     /**
      * Gets blogs created by a specific user.
      * @param userId The ID of the user
@@ -215,8 +220,15 @@ public class BlogService {
                     blog.setBlogId(rs.getInt("blog_id"));
                     blog.setTitle(rs.getString("title"));
                     blog.setContent(rs.getString("content"));
-                    blog.setThumbnail(rs.getString("thumbnail"));
-                    blog.setImage(rs.getString("image"));
+                    
+                    String thumbnailName = rs.getString("thumbnail");
+                    blog.setThumbnail(thumbnailName);
+                    blog.setThumbnailUrl(imageUtil.getThumbnailImageUrl(thumbnailName));
+                    
+                    String imageName = rs.getString("image");
+                    blog.setImage(imageName);
+                    blog.setImageUrl(imageUtil.getBlogImageUrl(imageName));
+                    
                     blog.setGenre(rs.getString("genre"));
                     blog.setCreatedBy(rs.getInt("created_by"));
                     
@@ -232,6 +244,7 @@ public class BlogService {
         
         return blogs;
     }
+    
     /**
      * Retrieves a blog by its ID.
      * @param blogId ID of the blog to retrieve
@@ -251,8 +264,15 @@ public class BlogService {
                     blog.setBlogId(rs.getInt("blog_id"));
                     blog.setTitle(rs.getString("title"));
                     blog.setContent(rs.getString("content"));
-                    blog.setThumbnail(rs.getString("thumbnail"));
-                    blog.setImage(rs.getString("image"));
+                    
+                    String thumbnailName = rs.getString("thumbnail");
+                    blog.setThumbnail(thumbnailName);
+                    blog.setThumbnailUrl(imageUtil.getThumbnailImageUrl(thumbnailName));
+                    
+                    String imageName = rs.getString("image");
+                    blog.setImage(imageName);
+                    blog.setImageUrl(imageUtil.getBlogImageUrl(imageName));
+                    
                     blog.setGenre(rs.getString("genre"));
                     blog.setCreatedBy(rs.getInt("created_by"));
                     
@@ -330,11 +350,9 @@ public class BlogService {
             // Handle thumbnail image upload if provided
             Part thumbnail = req.getPart("thumbnail");
             if (thumbnail != null && thumbnail.getSize() > 0) {
-                String thumbnailName = imageUtil.getImageNameFromPart(thumbnail);
-                // Use the same path format as in createBlog
-                boolean thumbnailUploaded = imageUtil.uploadImage(thumbnail, "rootPath", "blogThumbnails");
+                String thumbnailName = imageUtil.uploadThumbnailImage(thumbnail);
                 
-                if (thumbnailUploaded) {
+                if (thumbnailName != null) {
                     query.append(", thumbnail = ?");
                     params.add(thumbnailName);
                 } else {
@@ -347,11 +365,9 @@ public class BlogService {
             // Handle main image upload if provided
             Part image = req.getPart("image");
             if (image != null && image.getSize() > 0) {
-                String imageName = imageUtil.getImageNameFromPart(image);
-                // Use the same path format as in createBlog
-                boolean imageUploaded = imageUtil.uploadImage(image, "rootPath", "blogImages");
+                String imageName = imageUtil.uploadBlogImage(image);
                 
-                if (imageUploaded) {
+                if (imageName != null) {
                     query.append(", image = ?");
                     params.add(imageName);
                 } else {

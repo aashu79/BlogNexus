@@ -31,13 +31,20 @@
             <div class="profile-header">
                 <div class="profile-info">
                     <div class="profile-avatar">
-                        <img src="${not empty sessionScope.user.profilePicture ? contextPath.concat('/resources/imagesprofileImages/').concat(sessionScope.user.profilePicture) : 'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg'}" 
-                             alt="${sessionScope.user.firstName} ${sessionScope.user.lastName}">
+                        <!-- Use profilePictureUrl which is already formatted correctly -->
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.user.profilePictureUrl}">
+                                <img src="${contextPath}${sessionScope.user.profilePictureUrl}" 
+                                     alt="${sessionScope.user.firstName} ${sessionScope.user.lastName}">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg" 
+                                     alt="${sessionScope.user.firstName} ${sessionScope.user.lastName}">
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <div class="profile-text">
                         <h1 class="profile-name">${sessionScope.user.firstName} ${sessionScope.user.lastName}</h1>
-                      
-                        <p class="profile-joined"><i class="far fa-calendar-alt"></i> Joined May 2025</p>
                     </div>
                 </div>
                 <div class="profile-actions">
@@ -69,7 +76,8 @@
                                 <!-- Blog Card -->
                                 <div class="blog-card">
                                     <div class="blog-image">
-                                        <img src="${contextPath.concat('/resources/imagesblogThumbnails/').concat(blog.thumbnail)}" alt="${blog.title}">
+                                        <!-- Use blog.thumbnailUrl which is already formatted correctly -->
+                                        <img src="${contextPath}${blog.thumbnailUrl}" alt="${blog.title}">
                                         <div class="blog-tag">${blog.genre}</div>
                                     </div>
                                     <div class="blog-content">

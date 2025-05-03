@@ -115,6 +115,17 @@ public class UserModel {
         this.userRole = userRole;
     }
 
+ // Add this field to your UserModel class
+    private String profilePictureUrl;
+
+    // And add these getter/setter methods
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
+    }
     // Optional: toString method for debugging/logging
     @Override
     public String toString() {

@@ -33,10 +33,15 @@
     </div>
     <div class="user-profile">
         <div class="user-menu-toggle" id="user-menu-toggle">
-            <img src="${not empty sessionScope.user.profilePicture ? contextPath.concat('/resources/imagesprofileImages/').concat(sessionScope.user.profilePicture) : '#'}" 
-                 style="display: ${not empty sessionScope.user.profilePicture ? 'inline-block' : 'none'}" 
-                 alt="Profile">
-            <i class="fa-solid fa-user-circle" style="display: ${empty sessionScope.user.profilePicture ? 'inline-block' : 'none'}"></i>
+            <!-- Profile picture or default icon using cleaner c:choose approach -->
+            <c:choose>
+                <c:when test="${not empty sessionScope.user.profilePictureUrl}">
+                    <img src="${contextPath}${sessionScope.user.profilePictureUrl}" alt="Profile">
+                </c:when>
+                <c:otherwise>
+                    <i class="fa-solid fa-user-circle"></i>
+                </c:otherwise>
+            </c:choose>
             
             <span>${sessionScope.user.firstName}</span>
             <i class="fa-solid fa-chevron-down"></i>

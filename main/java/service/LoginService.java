@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.UserModel;
+import utils.ImageUtil;
 import utils.PasswordUtil;
 import utils.RedirectionUtil;
 import utils.ValidationResult;
@@ -22,6 +23,7 @@ public class LoginService {
     private Connection dbConnection;
     private RedirectionUtil redirectionUtil;
     private PasswordUtil passwordUtil;
+    private ImageUtil imageUtil;  // Added ImageUtil
 
     /**
      * Initializes login service with connection and utilities
@@ -29,6 +31,7 @@ public class LoginService {
     public LoginService() {
         this.redirectionUtil = new RedirectionUtil();
         this.passwordUtil = new PasswordUtil();
+        this.imageUtil = new ImageUtil();  // Initialize ImageUtil
         
         try {
             Connection dbConnection = DbConfig.getDbConnection();
@@ -82,7 +85,15 @@ public class LoginService {
                         user.setEmail(rs.getString("email"));
                         user.setPhone(rs.getString("phone"));
                         user.setCountry(rs.getString("country"));
-                        user.setProfilePicture(rs.getString("profile_picture"));
+                        
+                        // Get profile picture filename and URL
+                        String profilePictureFilename = rs.getString("profile_picture");
+                        user.setProfilePicture(profilePictureFilename); // Store the filename
+                        
+                        // Get and store the web URL for the profile picture
+                        String profilePictureUrl = imageUtil.getProfileImageUrl(profilePictureFilename);
+                        user.setProfilePictureUrl(profilePictureUrl); // Set the URL for web access
+                        
                         user.setUserRole(rs.getString("user_role"));
                         
                         // Create session

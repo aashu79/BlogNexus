@@ -85,11 +85,16 @@ public class RegisterService {
             return;
         }
 
+        // First get the image name
         String profilePictureName = imageUtil.getImageNameFromPart(profilePicture);
-        Boolean isUploadedBoolean = imageUtil.uploadImage(profilePicture, "rootPath", "profileImages");
         
-        if (!isUploadedBoolean) {
+        // Then upload using the dedicated method that already exists
+        boolean isUploaded = imageUtil.uploadProfileImage(profilePicture);
+        
+        if (!isUploaded) {
             System.err.println("Failed to upload profile image for user: " + email);
+            redirectionUtil.redirectWithMessage(req, res, "register.jsp", "error", "Failed to upload profile picture.");
+            return;
         }
         
         String hashedPassword = passwordUtil.hashPassword(password);
@@ -110,9 +115,8 @@ public class RegisterService {
             int rows = insertStmt.executeUpdate();
             if (rows > 0) {
                 System.out.println("User registered successfully: " + email);
-//                redirectionUtil.redirectWithMessage(req, res, "login.jsp", "success", "User registered successfully!");
                 redirectionUtil.urlRedirectWithMessage(req, res, "/login", "success", "User registered successfully!");            
-                } else {
+            } else {
                 System.err.println("Failed to register user: " + email + ", no rows affected");
                 redirectionUtil.redirectWithMessage(req, res, "register.jsp", "error", "Failed to register user.");
             }

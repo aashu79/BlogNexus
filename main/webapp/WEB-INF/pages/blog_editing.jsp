@@ -80,7 +80,9 @@
                 <input type="file" id="thumbnail" name="thumbnail" accept="image/*">
                 <div class="current-file">Current: ${blog.thumbnail}</div>
                 <div class="image-preview">
-                    <img src="${contextPath}/resources/imagesblogThumbnails/${blog.thumbnail}" alt="Current Thumbnail" onerror="this.src='${contextPath}/resources/images/placeholder.jpg'">
+                    <!-- Use thumbnailUrl from the blog model -->
+                    <img src="${contextPath}${blog.thumbnailUrl}" alt="Current Thumbnail" 
+                         onerror="this.src='${contextPath}/resources/images/placeholder.jpg'">
                 </div>
                 <p class="form-hint">Leave empty to keep current image</p>
             </div>
@@ -90,7 +92,9 @@
                 <input type="file" id="image" name="image" accept="image/*">
                 <div class="current-file">Current: ${blog.image}</div>
                 <div class="image-preview">
-                    <img src="${contextPath}/resources/imagesblogImages/${blog.image}" alt="Current Image" onerror="this.src='${contextPath}/resources/images/placeholder.jpg'">
+                    <!-- Use imageUrl from the blog model -->
+                    <img src="${contextPath}${blog.imageUrl}" alt="Current Image" 
+                         onerror="this.src='${contextPath}/resources/images/placeholder.jpg'">
                 </div>
                 <p class="form-hint">Leave empty to keep current image</p>
             </div>

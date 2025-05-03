@@ -252,42 +252,46 @@
                 </form>
                 
                 <!-- User Actions -->
-				   <div class="user-actions">
-				    <!-- Login/Register buttons (shown when not logged in) -->
-				    <div class="guest-actions" style="display: ${!isLoggedIn ? 'flex' : 'none'}">
-				        <a href="${contextPath}/login" class="btn btn-outline">Sign In</a>
-				        <a href="${contextPath}/register" class="btn btn-primary">Sign Up</a>
-				    </div>
-				    
-				    <!-- User dropdown menu (shown when logged in) -->
-				    <div class="user-dropdown" style="display: ${isLoggedIn ? 'block' : 'none'}">
-				        <div class="user-menu-toggle" id="user-menu-toggle">
-				            <!-- Profile picture or default icon -->
-				          <img src="${not empty sessionScope.user.profilePicture ? contextPath.concat('/resources/imagesprofileImages/').concat(sessionScope.user.profilePicture) : '#'}" 
-     				style="display: ${not empty sessionScope.user.profilePicture ? 'inline-block' : 'none'}" 
-     					alt="Profile">
-				            <i class="fa-solid fa-user-circle" style="display: ${empty sessionScope.user.profilePicture ? 'inline-block' : 'none'}"></i>
-				            
-				            <span>${sessionScope.user.firstName}</span>
-				            <i class="fa-solid fa-chevron-down"></i>
-				        </div>
-				        <ul class="user-dropdown-menu">
-				    
-				            <li><a href="${contextPath}/user/profile"><i class="fa-solid fa-user"></i> My Profile</a></li>
-				                    <li><a href="${contextPath}/user/favourite"><i class="fa fa-heart"></i> Favourites</a></li>
-				            <li><a href="${contextPath}/user/blog/create"><i class="fa-solid fa-pen-to-square"></i> Create Blog</a></li>
-				            
-				            <!-- Admin section (only visible for admin users) -->
-				            <li class="divider" style="display: ${isAdmin ? 'block' : 'none'}"></li>
-				            <li style="display: ${isAdmin ? 'block' : 'none'}">
-				                <a href="${contextPath}/admin/dashboard"><i class="fa-solid fa-shield-halved"></i> Admin Panel</a>
-				            </li>
-				            
-				            <li class="divider"></li>
-				            <li><a href="${contextPath}/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
-				        </ul>
-				    </div>
-				</div>
+                <div class="user-actions">
+                    <!-- Login/Register buttons (shown when not logged in) -->
+                    <div class="guest-actions" style="display: ${!isLoggedIn ? 'flex' : 'none'}">
+                        <a href="${contextPath}/login" class="btn btn-outline">Sign In</a>
+                        <a href="${contextPath}/register" class="btn btn-primary">Sign Up</a>
+                    </div>
+                    
+                    <!-- User dropdown menu (shown when logged in) -->
+                    <div class="user-dropdown" style="display: ${isLoggedIn ? 'block' : 'none'}">
+                        <div class="user-menu-toggle" id="user-menu-toggle">
+                            <!-- Profile picture or default icon -->
+                            <c:choose>
+                                <c:when test="${not empty sessionScope.user.profilePictureUrl}">
+                                    <img src="${contextPath}${sessionScope.user.profilePictureUrl}" alt="Profile">
+                                </c:when>
+                                <c:otherwise>
+                                    <i class="fa-solid fa-user-circle"></i>
+                                </c:otherwise>
+                            </c:choose>
+                            
+                            <span>${sessionScope.user.firstName}</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <ul class="user-dropdown-menu">
+                    
+                            <li><a href="${contextPath}/user/profile"><i class="fa-solid fa-user"></i> My Profile</a></li>
+                            <li><a href="${contextPath}/user/favourite"><i class="fa fa-heart"></i> Favourites</a></li>
+                            <li><a href="${contextPath}/user/blog/create"><i class="fa-solid fa-pen-to-square"></i> Create Blog</a></li>
+                            
+                            <!-- Admin section (only visible for admin users) -->
+                            <li class="divider" style="display: ${isAdmin ? 'block' : 'none'}"></li>
+                            <li style="display: ${isAdmin ? 'block' : 'none'}">
+                                <a href="${contextPath}/admin/dashboard"><i class="fa-solid fa-shield-halved"></i> Admin Panel</a>
+                            </li>
+                            
+                            <li class="divider"></li>
+                            <li><a href="${contextPath}/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         

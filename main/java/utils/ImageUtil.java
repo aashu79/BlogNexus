@@ -2,100 +2,165 @@ package utils;
 
 import java.io.File;
 import java.io.IOException;
-
 import jakarta.servlet.http.Part;
 
 /**
- * Utility class for handling image file uploads.
- * <p>
- * This class provides methods for extracting the file name from a {@link Part}
- * object and uploading the image file to a specified directory on the server.
- * </p>
+ * Utility class for handling image operations including uploads and path resolution.
  */
 public class ImageUtil {
+    
+    // Base directory configuration - this could also come from a properties file
+    private static final String BASE_IMAGE_DIR = "F:/coursework-2nd semester 2nd year/java/code/BlogNexus/src/main/webapp/resources/images";
+    
+    // Directory structure constants
+    private static final String PROFILE_DIR = "profiles";
+    private static final String BLOG_THUMBNAILS_DIR = "blogThumbnails";
+    private static final String BLOG_IMAGES_DIR = "blogImages";
+    
+    /**
+     * Extracts the file name from the given {@link Part} object.
+     * 
+     * @param part the {@link Part} object representing the uploaded file
+     * @return the extracted file name or default if none found
+     */
+    public String getImageNameFromPart(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        String imageName = null;
 
-	/**
-	 * Extracts the file name from the given {@link Part} object based on the
-	 * "content-disposition" header.
-	 * 
-	 * <p>
-	 * This method parses the "content-disposition" header to retrieve the file name
-	 * of the uploaded image. If the file name cannot be determined, a default name
-	 * "download.png" is returned.
-	 * </p>
-	 * 
-	 * @param part the {@link Part} object representing the uploaded file.
-	 * @return the extracted file name. If no filename is found, returns a default
-	 *         name "download.png".
-	 */
-	public String getImageNameFromPart(Part part) {
-		// Retrieve the content-disposition header from the part
-		String contentDisp = part.getHeader("content-disposition");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                imageName = s.substring(s.indexOf("=") + 2, s.length() - 1);
+            }
+        }
 
-		// Split the header by semicolons to isolate key-value pairs
-		String[] items = contentDisp.split(";");
+        if (imageName == null || imageName.isEmpty()) {
+            imageName = "default_" + System.currentTimeMillis() + ".png";
+        }
 
-		// Initialize imageName variable to store the extracted file name
-		String imageName = null;
+        return imageName;
+    }
 
-		// Iterate through the items to find the filename
-		for (String s : items) {
-			if (s.trim().startsWith("filename")) {
-				// Extract the file name from the header value
-				imageName = s.substring(s.indexOf("=") + 2, s.length() - 1);
-			}
-		}
-
-		// Check if the filename was not found or is empty
-		if (imageName == null || imageName.isEmpty()) {
-			// Assign a default file name if none was provided
-			imageName = "download.png";
-		}
-
-		// Return the extracted or default file namehttp://localhost:6969/BlogNexus/
-		return imageName;
-	}
-
-	/**
-	 * Uploads the image file from the given {@link Part} object to a specified
-	 * directory on the server.
-	 * 
-	 * <p>
-	 * This method ensures that the directory where the file will be saved exists
-	 * and creates it if necessary. It writes the uploaded file to the server's file
-	 * system. Returns {@code true} if the upload is successful, and {@code false}
-	 * otherwise.
-	 * </p>
-	 * 
-	 * @param part the {@link Part} object representing the uploaded image file.
-	 * @return {@code true} if the file was successfully uploaded, {@code false}
-	 *         otherwise.
-	 */
-	public boolean uploadImage(Part part, String rootPath, String saveFolder) {
-		String savePath = getSavePath(saveFolder);
-		File fileSaveDir = new File(savePath);
-
-		// Ensure the directory exists
-		if (!fileSaveDir.exists()) {
-			if (!fileSaveDir.mkdir()) {
-				return false; // Failed to create the directory
-			}
-		}
-		try {
-			// Get the image name
-			String imageName = getImageNameFromPart(part);
-			// Create the file path
-			String filePath = savePath + "/" + imageName;
-			// Write the file to the server
-			part.write(filePath);
-			return true; // Upload successful
-		} catch (IOException e) {
-			e.printStackTrace(); // Log the exception
-			return false; // Upload failed
-		}
-	}
-	
-	public String getSavePath(String saveFolder) {
-		return "F:/coursework-2nd semester 2nd year/java/code/BlogNexus/src/main/webapp/resources/images"+saveFolder+"/";
-	}
+    /**
+     * Gets the full path to a profile image.
+     * 
+     * @param filename the name of the image file
+     * @return the full path to the profile image
+     */
+    public String getProfileImagePath(String filename) {
+        return BASE_IMAGE_DIR + File.separator + PROFILE_DIR + File.separator + filename;
+    }
+    
+    /**
+     * Gets the full path to a blog thumbnail image.
+     * 
+     * @param filename the name of the image file
+     * @return the full path to the blog thumbnail image
+     */
+    public String getThumbnailImagePath(String filename) {
+        return BASE_IMAGE_DIR + File.separator + BLOG_THUMBNAILS_DIR + File.separator + filename;
+    }
+    
+    /**
+     * Gets the full path to a blog main image.
+     * 
+     * @param filename the name of the image file
+     * @return the full path to the blog main image
+     */
+    public String getBlogImagePath(String filename) {
+        return BASE_IMAGE_DIR + File.separator + BLOG_IMAGES_DIR + File.separator + filename;
+    }
+    
+    /**
+     * Gets the web-accessible URL path to a profile image (for use in HTML).
+     * 
+     * @param filename the name of the image file
+     * @return the web URL path to the profile image
+     */
+    public String getProfileImageUrl(String filename) {
+        return "/resources/images/" + PROFILE_DIR + "/" + filename;
+    }
+    
+    /**
+     * Gets the web-accessible URL path to a blog thumbnail (for use in HTML).
+     * 
+     * @param filename the name of the image file
+     * @return the web URL path to the blog thumbnail
+     */
+    public String getThumbnailImageUrl(String filename) {
+        return "/resources/images/" + BLOG_THUMBNAILS_DIR + "/" + filename;
+    }
+    
+    /**
+     * Gets the web-accessible URL path to a blog main image (for use in HTML).
+     * 
+     * @param filename the name of the image file
+     * @return the web URL path to the blog main image
+     */
+    public String getBlogImageUrl(String filename) {
+        return "/resources/images/" + BLOG_IMAGES_DIR + "/" + filename;
+    }
+    
+    /**
+     * Uploads a profile image.
+     * 
+     * @param part the {@link Part} object representing the uploaded file
+     * @return true if successful, false otherwise
+     */
+    public boolean uploadProfileImage(Part part) {
+        String imageName = getImageNameFromPart(part);
+        return uploadImage(part, getProfileImagePath(imageName));
+    }
+    
+    /**
+     * Uploads a blog thumbnail image.
+     * 
+     * @param part the {@link Part} object representing the uploaded file
+     * @return the filename of the uploaded image if successful, null otherwise
+     */
+    public String uploadThumbnailImage(Part part) {
+        String imageName = getImageNameFromPart(part);
+        boolean success = uploadImage(part, getThumbnailImagePath(imageName));
+        return success ? imageName : null;
+    }
+    
+    /**
+     * Uploads a blog main image.
+     * 
+     * @param part the {@link Part} object representing the uploaded file
+     * @return the filename of the uploaded image if successful, null otherwise
+     */
+    public String uploadBlogImage(Part part) {
+        String imageName = getImageNameFromPart(part);
+        boolean success = uploadImage(part, getBlogImagePath(imageName));
+        return success ? imageName : null;
+    }
+    
+    /**
+     * Internal method to handle the actual file upload.
+     * 
+     * @param part the {@link Part} object representing the uploaded file
+     * @param destinationPath the full path where the file should be saved
+     * @return true if successful, false otherwise
+     */
+    private boolean uploadImage(Part part, String destinationPath) {
+        try {
+            // Ensure the directory exists
+            File destFile = new File(destinationPath);
+            File parentDir = destFile.getParentFile();
+            
+            if (!parentDir.exists() && !parentDir.mkdirs()) {
+                System.err.println("Failed to create directory: " + parentDir.getAbsolutePath());
+                return false;
+            }
+            
+            // Write the file
+            part.write(destinationPath);
+            return true;
+        } catch (IOException e) {
+            System.err.println("Error uploading image: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
