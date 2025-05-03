@@ -11,13 +11,96 @@
     <title>Update Your Profile | BlogNexus</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Satisfy&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${contextPath}/css/profile_updating.css">
+    <style>
+        /* Improved profile picture preview styles */
+        .profile-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-upload {
+            position: relative;
+            width: 180px;
+            height: 180px;
+        }
+        
+        .upload-preview {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border: 2px solid #e0e0e0;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            overflow: visible; /* Allow the delete button to be visible outside */
+        }
+        
+        .upload-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+        
+        .remove-image {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ff4d4f;
+            border: 2px solid #fff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+        
+        .remove-image i {
+            font-size: 14px;
+        }
+        
+        .upload-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #aaa;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #f9f9f9;
+        }
+        
+        .upload-icon {
+            font-size: 40px;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        
+        .upload-placeholder span {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Disabled email field styling */
+        input[disabled] {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="../components/fontawesome.jsp"/>
 <jsp:include page="../components/navbar.jsp"></jsp:include>
     <div class="container">
         <div class="form-header">
-            
             <h1>Update Your Profile</h1>
             <p>Keep your account information up-to-date</p>
         </div>
@@ -25,11 +108,11 @@
         <div class="form-card">
             <jsp:include page="../components/message_handler.jsp"></jsp:include>
             
-            <form action="${contextPath}/updateProfile" method="post" enctype="multipart/form-data">                
+            <form action="${contextPath}/user/profile/update" method="post" enctype="multipart/form-data">                
                 <div class="profile-section">
                     <div class="profile-upload">
                         <div class="upload-preview" id="uploadPreview" ${empty user.profilePicture ? 'style="display:none;"' : ''}>
-                            <img id="previewImage" src="${empty user.profilePicture ? '' : contextPath.concat('/uploads/profiles/').concat(user.profilePicture)}" alt="Profile preview">
+                            <img id="previewImage" src="${empty user.profilePictureUrl ? '' : contextPath.concat(user.profilePictureUrl)}" alt="Profile preview">
                             <button type="button" class="remove-image" id="removeImage">
                                 <i class="fa-solid fa-xmark"></i>
                             </button>
@@ -41,7 +124,7 @@
                             <span>Upload photo</span>
                         </div>
                         <input type="file" id="profilePicture" name="profilePicture" accept="image/*" class="visually-hidden">
-                        <input type="hidden" name="currentProfilePicture" value="${user.profilePicture}">
+                        <input type="hidden" name="currentProfilePicture" value="${user.profilePicture}" id="currentProfilePicture">
                     </div>
                 </div>
                 
@@ -66,7 +149,9 @@
                         <label for="email">Email Address</label>
                         <div class="input-with-icon">
                             <i class="fa-regular fa-envelope"></i>
-                            <input type="email" id="email" name="email" value="${user.email}" required>
+                            <input type="email" id="email" name="email" value="${user.email}" readonly disabled required>
+                            <!-- Add a hidden input to ensure email is submitted with the form -->
+                            <input type="hidden" name="email" value="${user.email}">
                         </div>
                     </div>
                     
@@ -173,6 +258,19 @@
         const profileInput = document.getElementById('profilePicture');
         const previewImage = document.getElementById('previewImage');
         const removeButton = document.getElementById('removeImage');
+        const currentProfilePictureInput = document.getElementById('currentProfilePicture');
+        
+        // Debug image source
+        console.log("Current image source:", previewImage.src);
+        
+        // Check if we need to show the preview initially
+        if (previewImage && previewImage.src && previewImage.src !== window.location.href) {
+            uploadPreview.style.display = 'block';
+            uploadPlaceholder.style.display = 'none';
+        } else {
+            uploadPreview.style.display = 'none';
+            uploadPlaceholder.style.display = 'flex';
+        }
         
         uploadPlaceholder.addEventListener('click', function() {
             profileInput.click();
@@ -191,12 +289,14 @@
         });
         
         removeButton.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent any form submission
             e.stopPropagation();
             profileInput.value = '';
             previewImage.src = '';
             uploadPreview.style.display = 'none';
             uploadPlaceholder.style.display = 'flex';
-            document.querySelector('input[name="currentProfilePicture"]').value = '';
+            currentProfilePictureInput.value = '';
+            console.log("Profile picture removed");
         });
     </script>
 </body>
