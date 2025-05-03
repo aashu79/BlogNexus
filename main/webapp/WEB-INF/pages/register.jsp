@@ -184,7 +184,7 @@
                 </div>
             </form>
             <div class="form-footer">
-                <p>Already have an account? <a href="${contextPath}/login.jsp">Sign in</a></p>
+                <p>Already have an account? <a href="${contextPath}/login">Sign in</a></p>
             </div>
         </div>
     </div>
