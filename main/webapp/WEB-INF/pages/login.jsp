@@ -105,19 +105,12 @@
                     </div>
                 </div>
                 
-                <div class="form-options">
-                    <label class="remember-me">
-                        <input type="checkbox" name="remember">
-                        <div class="checkbox-custom"></div>
-                        <span>Remember me</span>
-                    </label>
-                    <a href="${contextPath}/auth/forgot-password" class="forgot-password">Forgot password?</a>
-                </div>
+              
                 
                 <button type="submit" class="btn submit-btn">Sign In</button>
                 
                 <div class="form-footer">
-                    <p>Don't have an account? <a href="${contextPath}/auth/register">Sign up</a></p>
+                    <p>Don't have an account? <a href="${contextPath}/register">Sign up</a></p>
                 </div>
             </form>
         </div>
