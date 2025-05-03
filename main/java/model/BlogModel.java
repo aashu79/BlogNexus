@@ -12,6 +12,8 @@ public class BlogModel {
     private String genre;
     private int createdBy; // Assuming this is a user ID
     private LocalDateTime createdAt;
+    private String authorName;
+
 
     // Default constructor
     public BlogModel() {
@@ -107,11 +109,11 @@ public class BlogModel {
         this.createdAt = createdAt;
     }
     
- // New fields to add to BlogModel:
+
     private String thumbnailUrl;
     private String imageUrl;
 
-    // New getter/setter methods:
+   
     public String getThumbnailUrl() {
         return thumbnailUrl;
     }
@@ -127,6 +129,16 @@ public class BlogModel {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+    
+  
+
+ public String getAuthorName() {
+     return authorName;
+ }
+
+ public void setAuthorName(String authorName) {
+     this.authorName = authorName;
+ }
 
     // toString method for debugging/logging
     @Override
