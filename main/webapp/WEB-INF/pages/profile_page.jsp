@@ -45,6 +45,9 @@
                     </div>
                     <div class="profile-text">
                         <h1 class="profile-name">${sessionScope.user.firstName} ${sessionScope.user.lastName}</h1>
+                 
+                        	<p>${sessionScope.user.email}</p>
+                       
                     </div>
                 </div>
                 <div class="profile-actions">

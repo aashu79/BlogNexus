@@ -10,7 +10,7 @@ import jakarta.servlet.http.Part;
 public class ImageUtil {
     
     // Base directory configuration - this could also come from a properties file
-    private static final String BASE_IMAGE_DIR = "F:/coursework-2nd semester 2nd year/java/code/BlogNexus/src/main/webapp/resources/images";
+    private static final String BASE_IMAGE_DIR = "F:/coursework-2nd semester 2nd year/java/code/src/main/webapp/resources/images";
     
     // Directory structure constants
     private static final String PROFILE_DIR = "profiles";
@@ -159,6 +159,30 @@ public class ImageUtil {
             return true;
         } catch (IOException e) {
             System.err.println("Error uploading image: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    /**
+     * Deletes a profile image file.
+     * 
+     * @param filename the name of the image file to delete
+     * @return true if successfully deleted, false otherwise
+     */
+    public boolean deleteProfileImage(String filename) {
+        if (filename == null || filename.trim().isEmpty()) {
+            return false;
+        }
+        
+        try {
+            File fileToDelete = new File(getProfileImagePath(filename));
+            if (fileToDelete.exists()) {
+                return fileToDelete.delete();
+            }
+            return false;
+        } catch (Exception e) {
+            System.err.println("Error deleting profile image: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
