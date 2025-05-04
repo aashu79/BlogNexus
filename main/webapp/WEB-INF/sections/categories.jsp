@@ -10,7 +10,7 @@
         </div>
 
         <div class="categories-grid">
-            <a href="${pageContext.request.contextPath}/category.jsp?cat=technology" class="category-card">
+            <a href="${pageContext.request.contextPath}/category?cat=technology" class="category-card">
                 <div class="category-icon">
                     <i class="fas fa-microchip"></i>
                 </div>
@@ -18,7 +18,7 @@
                 <p class="category-count">245 Articles</p>
             </a>
 
-            <a href="${pageContext.request.contextPath}/category.jsp?cat=environment" class="category-card">
+            <a href="${pageContext.request.contextPath}/category?cat=environment" class="category-card">
                 <div class="category-icon">
                     <i class="fas fa-leaf"></i>
                 </div>
@@ -26,7 +26,7 @@
                 <p class="category-count">182 Articles</p>
             </a>
 
-            <a href="${pageContext.request.contextPath}/category.jsp?cat=food" class="category-card">
+            <a href="${pageContext.request.contextPath}/category?cat=food" class="category-card">
                 <div class="category-icon">
                     <i class="fas fa-utensils"></i>
                 </div>
@@ -34,7 +34,7 @@
                 <p class="category-count">157 Articles</p>
             </a>
 
-            <a href="${pageContext.request.contextPath}/category.jsp?cat=travel" class="category-card">
+            <a href="${pageContext.request.contextPath}/category?cat=travel" class="category-card">
                 <div class="category-icon">
                     <i class="fas fa-map-marked-alt"></i>
                 </div>
