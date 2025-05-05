@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.UserModel;
 import service.LoginService;
 import utils.RedirectionUtil;
 
@@ -28,7 +30,6 @@ public class LoginController extends HttpServlet {
 		super();
 		loginService = new LoginService();
         redirectionUtil = new RedirectionUtil();
-
 	}
 
 	/**
@@ -37,7 +38,24 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		// Check if user is already logged in
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("user") != null) {
+			UserModel user = (UserModel) session.getAttribute("user");
+			
+			// Redirect based on user role
+			if ("admin".equalsIgnoreCase(user.getUserRole())) {
+				// Admin users go to dashboard
+				response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+			} else {
+				// Regular users go to home page
+				response.sendRedirect(request.getContextPath() + "/");
+			}
+			return;
+		}
+		
+		// If not logged in, show the login page
 		request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
 	}
 
@@ -51,8 +69,7 @@ public class LoginController extends HttpServlet {
 			loginService.authenticateUser(request, response);
 		} catch (Exception e) {
 			System.err.println(e);
-			redirectionUtil.redirectWithMessage(request, response, "login.jsp", "error","Something went wrong!");
+			redirectionUtil.redirectWithMessage(request, response, "login.jsp", "error", "Something went wrong!");
 		}
 	}
-
 }

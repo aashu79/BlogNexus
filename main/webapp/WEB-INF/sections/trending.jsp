@@ -1,59 +1,78 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="service.TrendingService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="model.BlogModel" %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/trending.css">
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
+<%
+    // Get trending blogs with author details
+    TrendingService trendingService = new TrendingService();
+    Map<String, Object> result = trendingService.getRandomBlogsWithAuthors(3);
+    
+    List<BlogModel> trendingBlogs = (List<BlogModel>) result.get("blogs");
+    Map<Integer, Map<String, String>> authorDetails = (Map<Integer, Map<String, String>>) result.get("authorDetails");
+    
+    request.setAttribute("trendingBlogs", trendingBlogs);
+    request.setAttribute("authorDetails", authorDetails);
+%>
+
+<link rel="stylesheet" href="${contextPath}/css/trending.css">
 
 <section class="trending-section section">
     <div class="container">
         <div class="trending-header">
             <h2 class="trending-title">Trending This Week</h2>
-            <a href="${pageContext.request.contextPath}/trending.jsp" class="btn btn-sm btn-outline">View All</a>
+           
         </div>
 
         <div class="trending-grid">
             <div class="trending-posts">
-                <div class="post-card">
-                          <jsp:include page="../components/blog_card.jsp">
-                    <jsp:param name="blog_id" value="1" />
-                    <jsp:param name="thumbnail" value="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=800" />
-                    <jsp:param name="title" value="The Beauty of Natural Landscapes" />
-                    <jsp:param name="content" value="Exploring how spending time in nature can reduce stress, improve mood, and enhance overall mental health. Research shows even brief exposure to natural environments provides significant benefits for cognitive function and emotional wellbeing." />
-                    <jsp:param name="genre" value="Nature" />
-                    <jsp:param name="created_by" value="aashu79" />
-                    <jsp:param name="formattedDate" value="April 20, 2025" />
-                    <jsp:param name="readTime" value="5 min read" />
-                    <jsp:param name="authorName" value="Aashu Sharma" />
-                    <jsp:param name="authorRole" value="Environmental Writer" />
-                </jsp:include>
-                </div>
-                <div class="post-card">
-                        <jsp:include page="../components/blog_card.jsp">
-                    <jsp:param name="blog_id" value="3" />
-                    <jsp:param name="thumbnail" value="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800" />
-                    <jsp:param name="title" value="Plant-Based Diets: Benefits for Health and Environment" />
-                    <jsp:param name="content" value="Exploring the dual impact of plant-based eating on personal health outcomes and environmental sustainability. Research shows significant benefits for cardiovascular health, weight management, and reducing carbon footprint." />
-                    <jsp:param name="genre" value="Food" />
-                    <jsp:param name="created_by" value="raj_kumar" />
-                    <jsp:param name="formattedDate" value="April 15, 2025" />
-                    <jsp:param name="readTime" value="6 min read" />
-                    <jsp:param name="authorName" value="Raj Kumar" />
-                    <jsp:param name="authorRole" value="Nutrition Expert" />
-                </jsp:include>
-                </div>
-                <div class="post-card">
-                       <jsp:include page="../components/blog_card.jsp">
-                    <jsp:param name="blog_id" value="5" />
-                    <jsp:param name="thumbnail" value="https://images.unsplash.com/photo-1616628188050-7b7d8b970dee?w=800" />
-                    <jsp:param name="title" value="Mindfulness Practices for Busy Professionals" />
-                    <jsp:param name="content" value="Simple, effective techniques to incorporate mindfulness into your daily routine, even with a packed schedule. Learn how small moments of presence can lead to improved focus, reduced stress, and better work-life balance." />
-                    <jsp:param name="genre" value="Wellness" />
-                    <jsp:param name="created_by" value="vikram_patel" />
-                    <jsp:param name="formattedDate" value="April 10, 2025" />
-                    <jsp:param name="readTime" value="4 min read" />
-                    <jsp:param name="authorName" value="Vikram Patel" />
-                    <jsp:param name="authorRole" value="Wellness Coach" />
-                </jsp:include>
-                </div>
+                <c:choose>
+                    <c:when test="${empty trendingBlogs}">
+                        <div class="no-blogs-message" style="text-align:center; padding:2rem; background:#f8f8f8; border-radius:8px;">
+                            <p>No trending blogs available at the moment.</p>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach items="${trendingBlogs}" var="blog">
+                            <div class="post-card">
+                                <jsp:include page="../components/blog_card.jsp">
+                                    <jsp:param name="blog_id" value="${blog.blogId}" />
+                                    <jsp:param name="thumbnailUrl" value="${blog.thumbnailUrl}" />
+                                    <jsp:param name="title" value="${blog.title}" />
+                                    <jsp:param name="content" value="${blog.content}" />
+                                    <jsp:param name="genre" value="${blog.genre}" />
+                                    <jsp:param name="formattedDate" value="${authorDetails[blog.blogId].formattedDate}" />
+                                    <jsp:param name="readTime" value="${authorDetails[blog.blogId].readTime}" />
+                                    <jsp:param name="authorName" value="${blog.authorName}" />
+                                    <jsp:param name="authorRole" value="${authorDetails[blog.blogId].authorRole}" />
+                                    <jsp:param name="authorProfileUrl" value="${authorDetails[blog.blogId].profilePicture}" />
+                                </jsp:include>
+                            </div>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    .blog-card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+    
+    .blog-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .blog-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+</style>

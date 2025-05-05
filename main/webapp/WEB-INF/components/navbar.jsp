@@ -19,6 +19,11 @@
         position: relative;
     }
     
+    .guest-actions{
+    	display: flex;
+    	gap: 15px;
+    }
+    
     /* Profile button styling - enhanced */
     .user-menu-toggle {
         display: flex;
