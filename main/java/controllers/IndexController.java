@@ -31,13 +31,13 @@ public class IndexController extends HttpServlet {
 	    String contextPath = request.getContextPath();
 
 	    // Check if the requested URI matches the root route "/"
-	    if (requestedUri.equals(contextPath + "/")) {
+//	    if (requestedUri.equals(contextPath + "/")) {
 	        // Forward to the index.jsp page
 	        request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
-	    } else {
-	        // Send 404 error for any other route
-	        request.getRequestDispatcher("/WEB-INF/pages/error404.jsp").forward(request, response);
-	    }
+//	    } else {
+//	        // Send 404 error for any other route
+//	        request.getRequestDispatcher("/WEB-INF/pages/error404.jsp").forward(request, response);
+//	    }
 	}
 
 	/**

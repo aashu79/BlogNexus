@@ -102,7 +102,7 @@ public class BlogService {
             int result = stmt.executeUpdate();
             
             if (result > 0) {
-                redirectionUtil.urlRedirectWithMessage(req, res, "/blogs", "success", "Blog published successfully!");
+                redirectionUtil.urlRedirectWithMessage(req, res, "/user/profile", "success", "Blog published successfully!");
             } else {
                 redirectionUtil.redirectWithMessage(req, res, "blog_creation.jsp", "error", "Failed to publish blog");
             }
@@ -399,7 +399,7 @@ public class BlogService {
     }
     
     /**
-     * Deletes a blog by ID.
+     * Deletes a blog by ID, including all related records in other tables.
      * @param req HTTP request with blog ID parameter
      * @param res HTTP response for redirection
      * @throws IOException If redirect operation fails
@@ -413,7 +413,7 @@ public class BlogService {
         
         String blogIdParam = req.getParameter("id");
         if (blogIdParam == null || blogIdParam.trim().isEmpty()) {
-            redirectionUtil.urlRedirectWithMessage(req, res, "/admin/blogs", "error", "Blog ID is required");
+            redirectionUtil.urlRedirectWithMessage(req, res, "/", "error", "Blog ID is required");
             return;
         }
         
@@ -422,26 +422,74 @@ public class BlogService {
             
             // Authorization check - only owner or admin can delete
             if (!isUserAuthorizedForBlog(userId, userRole, blogId)) {
-                redirectionUtil.urlRedirectWithMessage(req, res, "/blogs", "error", "Not authorized to delete this blog");
+                redirectionUtil.urlRedirectWithMessage(req, res, "/", "error", "Not authorized to delete this blog");
                 return;
             }
             
-            String query = "DELETE FROM blog WHERE blog_id = ?";
-            try (PreparedStatement stmt = dbConnection.prepareStatement(query)) {
-                stmt.setInt(1, blogId);
-                int result = stmt.executeUpdate();
+            // Start transaction
+            dbConnection.setAutoCommit(false);
+            
+            try {
+                // First delete records from related tables
+                // Delete comments
+                deleteRelatedRecords("comment", "blog_id", blogId);
                 
-                if (result > 0) {
-                    redirectionUtil.urlRedirectWithMessage(req, res, "/admin/blogs", "success", "Blog deleted successfully");
-                } else {
-                    redirectionUtil.urlRedirectWithMessage(req, res, "/admin/blogs", "error", "Failed to delete blog");
+                // Delete likes
+                deleteRelatedRecords("likes", "blog_id", blogId);
+                
+                // Delete favorites
+                deleteRelatedRecords("favourite", "blog_id", blogId);
+                
+                // Now delete the blog itself
+                String query = "DELETE FROM blog WHERE blog_id = ?";
+                try (PreparedStatement stmt = dbConnection.prepareStatement(query)) {
+                    stmt.setInt(1, blogId);
+                    int result = stmt.executeUpdate();
+                    
+                    if (result > 0) {
+                        // Commit transaction
+                        dbConnection.commit();
+                        
+                        String redirectUrl = "admin".equalsIgnoreCase(userRole) ? "/admin/blogs" : "/user/profile";
+                        redirectionUtil.urlRedirectWithMessage(req, res, redirectUrl, "success", "Blog deleted successfully");
+                    } else {
+                        // Rollback transaction
+                        dbConnection.rollback();
+                        
+                        String redirectUrl = "admin".equalsIgnoreCase(userRole) ? "/admin/blogs" : "/user/profile";
+                        redirectionUtil.urlRedirectWithMessage(req, res, redirectUrl, "error", "Failed to delete blog");
+                    }
                 }
+            } catch (Exception e) {
+                // Rollback transaction on any error
+                dbConnection.rollback();
+                throw e;
+            } finally {
+                // Reset auto-commit
+                dbConnection.setAutoCommit(true);
             }
         } catch (NumberFormatException e) {
-            redirectionUtil.urlRedirectWithMessage(req, res, "/admin/blogs", "error", "Invalid blog ID");
+            String redirectUrl = "admin".equalsIgnoreCase(userRole) ? "/admin/blogs" : "/user/profile";
+            redirectionUtil.urlRedirectWithMessage(req, res, redirectUrl, "error", "Invalid blog ID format");
         } catch (SQLException e) {
             System.err.println("Error deleting blog: " + e.getMessage());
-            redirectionUtil.urlRedirectWithMessage(req, res, "/admin/blogs", "error", "Database error occurred");
+            String redirectUrl = "admin".equalsIgnoreCase(userRole) ? "/admin/blogs" : "/user/profile";
+            redirectionUtil.urlRedirectWithMessage(req, res, redirectUrl, "error", "Database error");
+        }
+    }
+
+    /**
+     * Helper method to delete related records from a specific table
+     * @param tableName Table to delete from
+     * @param columnName Column name for the foreign key
+     * @param blogId Blog ID to match
+     * @throws SQLException If deletion fails
+     */
+    private void deleteRelatedRecords(String tableName, String columnName, int blogId) throws SQLException {
+        String query = "DELETE FROM " + tableName + " WHERE " + columnName + " = ?";
+        try (PreparedStatement stmt = dbConnection.prepareStatement(query)) {
+            stmt.setInt(1, blogId);
+            stmt.executeUpdate();
         }
     }
     
