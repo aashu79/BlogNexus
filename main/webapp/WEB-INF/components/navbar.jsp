@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="${contextPath}/css/navbar.css">
     
 <style>
-    
     /* Main dropdown container */
     .user-dropdown {
         position: relative;
@@ -178,6 +177,46 @@
         color: #e53e3e;
     }
     
+    /* Simple Search Styles */
+    .search-container {
+        position: relative;
+        width: 240px;
+    }
+    
+    .search-input {
+        width: 100%;
+        padding: 10px 40px 10px 15px;
+        border-radius: 20px;
+        border: 1px solid #ddd;
+        font-size: 0.95rem;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        color: #333;
+    }
+    
+    .search-input:focus {
+        outline: none;
+        border-color: #4caf50;
+        background-color: #fff;
+    }
+    
+    .search-btn {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #4caf50;
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 5px;
+    }
+    
+    .search-btn:hover {
+        color: #388e3c;
+    }
+    
     /* Simple animation for dropdown */
     @keyframes dropdownFade {
         from {
@@ -187,6 +226,13 @@
         to {
             opacity: 1;
             transform: translateY(0);
+        }
+    }
+    
+    /* Responsive adjustments for search */
+    @media (max-width: 768px) {
+        .search-container {
+            width: 100%;
         }
     }
 </style>
@@ -246,10 +292,10 @@
                     </li>
                 </ul>
                 
-                <!-- Search Form -->
+                <!-- Simple Search Form -->
                 <form class="search-form" action="${contextPath}/search" method="get">
                     <div class="search-container">
-                        <input type="text" name="query" placeholder="Search..." class="search-input">
+                        <input type="text" name="query" placeholder="Search blogs..." class="search-input">
                         <button type="submit" class="search-btn" aria-label="Search">
                             <i class="fa-solid fa-search"></i>
                         </button>
