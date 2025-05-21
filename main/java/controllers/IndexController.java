@@ -8,46 +8,46 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class IndexController
+ * Servlet implementation class IndexController. Handles requests for the home
+ * page of the application.
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/" })
 public class IndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * Initializes the IndexController.
 	 */
 	public IndexController() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
-	    // Get the requested URI relative to the context path
-	    String requestedUri = request.getRequestURI();
-	    String contextPath = request.getContextPath();
-
-	    // Check if the requested URI matches the root route "/"
-//	    if (requestedUri.equals(contextPath + "/")) {
-	        // Forward to the index.jsp page
-	        request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
-//	    } else {
-//	        // Send 404 error for any other route
-//	        request.getRequestDispatcher("/WEB-INF/pages/error404.jsp").forward(request, response);
-//	    }
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Handles GET requests for the root route.
+	 * 
+	 * @param request  The HTTP request object
+	 * @param response The HTTP response object
+	 * @throws ServletException If a servlet-specific error occurs
+	 * @throws IOException      If an I/O error occurs
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Forward to the index.jsp page
+		request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
+	}
+
+	/**
+	 * Handles POST requests for the root route. Delegates processing to the doGet
+	 * method.
+	 * 
+	 * @param request  The HTTP request object
+	 * @param response The HTTP response object
+	 * @throws ServletException If a servlet-specific error occurs
+	 * @throws IOException      If an I/O error occurs
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

@@ -348,3 +348,92 @@ body {
         grid-column: span 1;
     }
 }
+
+
+
+
+
+
+
+ /* Improved profile picture preview styles */
+        .profile-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-upload {
+            position: relative;
+            width: 180px;
+            height: 180px;
+        }
+        
+        .upload-preview {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border: 2px solid #e0e0e0;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            overflow: visible; /* Allow the delete button to be visible outside */
+        }
+        
+        .upload-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+        
+        .remove-image {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ff4d4f;
+            border: 2px solid #fff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+        
+        .remove-image i {
+            font-size: 14px;
+        }
+        
+        .upload-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #aaa;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #f9f9f9;
+        }
+        
+        .upload-icon {
+            font-size: 40px;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        
+        .upload-placeholder span {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Disabled email field styling */
+        input[disabled] {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
