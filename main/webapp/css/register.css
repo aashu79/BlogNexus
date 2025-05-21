@@ -36,6 +36,16 @@ html {
   display: flex;
   height: 100vh;
 }
+     .form-message {
+            color: #b94a48;
+            background: #fbe3e4;
+            border: 1px solid #fbc2c4;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 18px;
+            text-align: center;
+            font-size: 1.05em;
+        }
 
 /* --- VISUAL SECTION STYLES --- */
 .visual-section {

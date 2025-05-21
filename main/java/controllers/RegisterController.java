@@ -14,34 +14,45 @@ import utils.RedirectionUtil;
 import java.io.IOException;
 
 /**
- * Servlet implementation class RegisterController
+ * Servlet implementation for the RegisterController. Handles user registration
+ * functionality, including displaying the registration form and processing user
+ * registration.
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-maxFileSize = 1024 * 1024 * 10, // 10MB
-maxRequestSize = 1024 * 1024 * 50) // 50MB
+		maxFileSize = 1024 * 1024 * 10, // 10MB
+		maxRequestSize = 1024 * 1024 * 50 // 50MB
+)
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RegisterService registerService;
-    private RedirectionUtil redirectionUtil;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegisterController() {
-        super();
-        this.redirectionUtil = new RedirectionUtil();
-        this.registerService = new RegisterService();
-    }
+	private RedirectionUtil redirectionUtil;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Initializes the RegisterController with required services.
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public RegisterController() {
+		super();
+		this.redirectionUtil = new RedirectionUtil();
+		this.registerService = new RegisterService();
+	}
+
+	/**
+	 * Handles GET requests to display the registration page. Redirects users to
+	 * appropriate pages if they are already logged in.
+	 * 
+	 * @param request  The HTTP request object
+	 * @param response The HTTP response object
+	 * @throws ServletException If a servlet-specific error occurs
+	 * @throws IOException      If an I/O error occurs
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// Check if user is already logged in
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("user") != null) {
 			UserModel user = (UserModel) session.getAttribute("user");
-			
+
 			// Redirect based on user role
 			if ("admin".equalsIgnoreCase(user.getUserRole())) {
 				// Admin users go to dashboard
@@ -50,22 +61,32 @@ public class RegisterController extends HttpServlet {
 				// Regular users go to home page
 				response.sendRedirect(request.getContextPath() + "/");
 			}
-			return; // Important: stop further processing
+			return; // Stop further processing
 		}
-		
-		// If not logged in, show registration page
+
+		// If not logged in, show the registration page
 		request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Handles POST requests to process user registration. Prevents registration
+	 * attempts by logged-in users and delegates registration logic to the
+	 * RegisterService.
+	 * 
+	 * @param request  The HTTP request object
+	 * @param response The HTTP response object
+	 * @throws ServletException If a servlet-specific error occurs
+	 * @throws IOException      If an I/O error occurs
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Also check login status for POST requests to prevent registration attempts by logged-in users
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Check login status for POST requests to prevent registration attempts by
+		// logged-in users
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("user") != null) {
 			UserModel user = (UserModel) session.getAttribute("user");
-			
+
+			// Redirect based on user role
 			if ("admin".equalsIgnoreCase(user.getUserRole())) {
 				response.sendRedirect(request.getContextPath() + "/admin/dashboard");
 			} else {
@@ -73,7 +94,7 @@ public class RegisterController extends HttpServlet {
 			}
 			return;
 		}
-		
+
 		// Process registration for non-logged-in users
 		try {
 			registerService.addUser(request, response);

@@ -8,33 +8,47 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class Contact_usController
+ * Servlet implementation for the Contact_usController. Handles requests for the
+ * "Contact Us" page.
  */
-@WebServlet(asyncSupported = true, urlPatterns = {"/contact"})
+@WebServlet(asyncSupported = true, urlPatterns = { "/contact" })
 public class Contact_usController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Contact_usController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Initializes the Contact_usController.
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	public Contact_usController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * Handles GET requests for the "Contact Us" page.
+	 * 
+	 * @param request  The HTTP request object
+	 * @param response The HTTP response object
+	 * @throws ServletException If a servlet-specific error occurs
+	 * @throws IOException      If an I/O error occurs
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Forward request to the "Contact Us" JSP page
 		request.getRequestDispatcher("/WEB-INF/pages/contact_us.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Handles POST requests for the "Contact Us" page. Delegates processing to the
+	 * doGet method.
+	 * 
+	 * @param request  The HTTP request object
+	 * @param response The HTTP response object
+	 * @throws ServletException If a servlet-specific error occurs
+	 * @throws IOException      If an I/O error occurs
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Delegate to doGet for processing
 		doGet(request, response);
 	}
 

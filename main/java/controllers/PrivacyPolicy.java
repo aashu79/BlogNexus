@@ -8,34 +8,45 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class PrivacyPolicy
+ * Servlet implementation class PrivacyPolicy. Handles requests for the Privacy
+ * Policy page.
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/privacy-policy" })
 public class PrivacyPolicy extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public PrivacyPolicy() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Initializes the PrivacyPolicy controller.
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	public PrivacyPolicy() {
+		super();
+	}
+
+	/**
+	 * Handles GET requests for the Privacy Policy page.
+	 * 
+	 * @param request  The HTTP request object
+	 * @param response The HTTP response object
+	 * @throws ServletException If a servlet-specific error occurs
+	 * @throws IOException      If an I/O error occurs
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Forward to the Privacy Policy JSP page
 		request.getRequestDispatcher("/WEB-INF/pages/privacy_policy.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Handles POST requests for the Privacy Policy page. Delegates processing to
+	 * the doGet method.
+	 * 
+	 * @param request  The HTTP request object
+	 * @param response The HTTP response object
+	 * @throws ServletException If a servlet-specific error occurs
+	 * @throws IOException      If an I/O error occurs
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
