@@ -21,6 +21,7 @@ import java.util.Map;
 /**
  * Controller for listing blogs in the admin panel. Handles displaying blogs and
  * their associated authors for administrative purposes.
+ * @author Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin/blogs" })
 public class BlogListing extends HttpServlet {

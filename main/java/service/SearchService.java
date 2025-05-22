@@ -17,6 +17,7 @@ import utils.ImageUtil;
 
 /**
  * Service class for search-related operations
+ * @author Aashu Kumar Sah
  */
 public class SearchService {
     

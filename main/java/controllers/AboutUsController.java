@@ -10,6 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class AboutUsController This controller handles
  * requests for the "About Us" page.
+ * @author Ayush Bhattarai
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/about" })
 public class AboutUsController extends HttpServlet {

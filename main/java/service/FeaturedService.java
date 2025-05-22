@@ -17,6 +17,7 @@ import utils.ImageUtil;
 
 /**
  * Service for handling featured blog operations.
+ * @author Aashu Kumar Sah
  */
 public class FeaturedService {
 

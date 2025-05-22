@@ -2,6 +2,7 @@ package utils;
 
 /**
  * Utility class representing the result of a validation operation.
+ * @author Aashu Kumar Sah
  */
 public class ValidationResult {
 	private boolean success;

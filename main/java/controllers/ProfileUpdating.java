@@ -14,6 +14,7 @@ import java.io.IOException;
 /**
  * Servlet implementation for ProfileUpdating. Handles profile update
  * functionality, including displaying the update form and processing updates.
+ * @author Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/user/profile/update" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, // 1 MB

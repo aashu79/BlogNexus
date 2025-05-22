@@ -10,6 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation for the Contact_usController. Handles requests for the
  * "Contact Us" page.
+ * @author Sanjok Shrestha
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/contact" })
 public class Contact_usController extends HttpServlet {

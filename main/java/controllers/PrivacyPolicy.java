@@ -10,6 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class PrivacyPolicy. Handles requests for the Privacy
  * Policy page.
+ * @author Bishal Kumar Rajak
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/privacy-policy" })
 public class PrivacyPolicy extends HttpServlet {

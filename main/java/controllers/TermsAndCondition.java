@@ -10,6 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class TermsAndCondition. Handles requests for the
  * Terms and Conditions page.
+ * @author Bishal Kumar Rajak
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/terms-and-condition" })
 public class TermsAndCondition extends HttpServlet {

@@ -11,6 +11,7 @@ import java.io.IOException;
 
 /**
  * Controller for blog deletion.
+ * @author Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/user/blog/delete" })
 public class BlogDeleteController extends HttpServlet {

@@ -19,6 +19,7 @@ import utils.ValidationUtils;
 /**
  * Service class for handling user registration operations. Manages database
  * connections and user data insertion.
+ * @author Aashu Kumar Sah
  */
 public class RegisterService {
 

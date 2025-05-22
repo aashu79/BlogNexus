@@ -1,6 +1,7 @@
 package service;
 
 import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +18,11 @@ import utils.PasswordUtil;
 import utils.RedirectionUtil;
 import utils.ValidationResult;
 import utils.ValidationUtils;
+
+/**
+ * Service for handling Login operations.
+ * @author Aashu Kumar Sah
+ */
 
 public class LoginService {
 

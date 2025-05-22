@@ -21,6 +21,7 @@ import java.util.List;
  * Controller for displaying the blog detail page with comments, favourites, and
  * likes. Handles requests for viewing blog details and managing user
  * interactions like comments, favourites, and likes.
+ * @author Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/blog/*", "/blog-detail", "/blog/comment", "/blog/favourite",
 		"/blog/like" })

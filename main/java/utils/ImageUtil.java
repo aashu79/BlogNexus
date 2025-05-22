@@ -7,6 +7,7 @@ import jakarta.servlet.http.Part;
 /**
  * Utility class for handling image operations including uploads and path
  * resolution.
+ * @author Aashu Kumar Sah
  */
 public class ImageUtil {
 

@@ -22,6 +22,7 @@ import java.util.Map;
 /**
  * Controller for blog editing operations. Handles displaying the edit form and
  * processing blog updates.
+ * @author Sanjok Shrestha & Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/user/blog/edit/*" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, // 1 MB

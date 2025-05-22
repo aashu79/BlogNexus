@@ -20,6 +20,7 @@ import utils.RedirectionUtil;
 
 /**
  * Service class for handling user's favourite blogs
+ * @author Aashu Kumar Sah
  */
 public class UserFavouriteService {
 	private Connection dbConnection;

@@ -15,6 +15,7 @@ import javax.crypto.spec.PBEKeySpec;
  * Utility class for securely hashing and verifying passwords using PBKDF2.
  * Implements password hashing with salt for secure storage. Does NOT provide
  * reversible encryption (passwords cannot be decrypted).
+ * @author Aashu Kumar Sah
  */
 public class PasswordUtil {
 	private static final int SALT_LENGTH_BYTE = 16;

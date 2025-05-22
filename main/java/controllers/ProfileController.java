@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * Controller for user profile operations. Displays user-specific information
  * and their blogs on the profile page.
+ * @author Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/user/profile" })
 public class ProfileController extends HttpServlet {

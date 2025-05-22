@@ -1,43 +1,83 @@
 package model;
 
+/**
+ * Model class representing a like on a blog post.
+ * Stores information about which user liked which blog.
+ *
+ * @author Aashu Kumar Sah
+ */
 public class LikeModel {
-	private int likedId;
-	private int blogId;
-	private int userId;
+    // Unique identifier for the like entry
+    private int likedId;
+    // Identifier for the blog that is liked
+    private int blogId;
+    // Identifier for the user who liked the blog
+    private int userId;
 
-	// Default constructor
-	public LikeModel() {
-	}
+    /**
+     * Default constructor
+     */
+    public LikeModel() {
+    }
 
-	// Parameterized constructor
-	public LikeModel(int likedId, int blogId, int userId) {
-		this.likedId = likedId;
-		this.blogId = blogId;
-		this.userId = userId;
-	}
+    /**
+     * Parameterized constructor
+     *
+     * @param likedId Unique identifier for the like entry
+     * @param blogId  Identifier for the blog
+     * @param userId  Identifier for the user
+     */
+    public LikeModel(int likedId, int blogId, int userId) {
+        this.likedId = likedId;
+        this.blogId = blogId;
+        this.userId = userId;
+    }
 
-	// Getters and setters
-	public int getLikedId() {
-		return likedId;
-	}
+    /**
+     * Gets the like ID.
+     * @return likedId
+     */
+    public int getLikedId() {
+        return likedId;
+    }
 
-	public void setLikedId(int likedId) {
-		this.likedId = likedId;
-	}
+    /**
+     * Sets the like ID.
+     * @param likedId Unique identifier for the like entry
+     */
+    public void setLikedId(int likedId) {
+        this.likedId = likedId;
+    }
 
-	public int getBlogId() {
-		return blogId;
-	}
+    /**
+     * Gets the blog ID.
+     * @return blogId
+     */
+    public int getBlogId() {
+        return blogId;
+    }
 
-	public void setBlogId(int blogId) {
-		this.blogId = blogId;
-	}
+    /**
+     * Sets the blog ID.
+     * @param blogId Identifier for the blog
+     */
+    public void setBlogId(int blogId) {
+        this.blogId = blogId;
+    }
 
-	public int getUserId() {
-		return userId;
-	}
+    /**
+     * Gets the user ID.
+     * @return userId
+     */
+    public int getUserId() {
+        return userId;
+    }
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+    /**
+     * Sets the user ID.
+     * @param userId Identifier for the user
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }

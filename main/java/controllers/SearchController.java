@@ -18,6 +18,7 @@ import service.SearchService;
 /**
  * Servlet implementation for the SearchController. Handles search functionality
  * to display search results for blogs.
+ * @author Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/search" })
 public class SearchController extends HttpServlet {

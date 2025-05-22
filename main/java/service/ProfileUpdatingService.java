@@ -27,6 +27,7 @@ public class ProfileUpdatingService {
 
 	/**
 	 * Initializes profile updating service with connection and utilities
+	 * @author Aashu Kumar Sah
 	 */
 	public ProfileUpdatingService() {
 		this.redirectionUtil = new RedirectionUtil();

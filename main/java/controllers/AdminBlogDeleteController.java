@@ -15,6 +15,7 @@ import java.io.IOException;
 /**
  * Controller for blog deletion in the admin panel. Handles redirection to blog
  * listing and processing of blog deletion requests.
+ * @author Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin/blogs/delete" })
 public class AdminBlogDeleteController extends HttpServlet {
