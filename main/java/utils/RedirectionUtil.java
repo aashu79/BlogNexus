@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
  * Utility class for handling page redirections and message passing in web
  * application. Provides methods for page forwarding, URL redirection, and
  * attaching messages to request/session.
+ * @author Aashu Kumar Sah
  */
 public class RedirectionUtil {
 	private final String baseUrl = "/WEB-INF/pages/";

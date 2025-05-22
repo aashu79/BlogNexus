@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Controller for handling user addition in admin panel. Handles both display of
  * the add user form and user creation functionality.
+ * @author Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin/users/add" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, // 1 MB

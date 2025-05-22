@@ -17,6 +17,7 @@ import utils.ImageUtil;
 
 /**
  * Service class for handling trending blogs operations.
+ * @author Aashu Kumar Sah
  */
 public class TrendingService {
 

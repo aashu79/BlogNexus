@@ -21,6 +21,7 @@ import java.util.Map;
 /**
  * Controller for managing user's favorite blogs. Handles displaying and
  * removing blogs from the user's favorites list.
+ * @author Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/user/favourite", "/user/favourite/remove" })
 public class Favourite extends HttpServlet {

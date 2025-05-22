@@ -16,6 +16,7 @@ import service.CategoryService;
 /**
  * Servlet implementation for the CategoryController. Handles requests for
  * displaying blogs by category.
+ * @author Kamakshi Gupta & Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/category" })
 public class CategoryController extends HttpServlet {

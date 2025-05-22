@@ -24,6 +24,7 @@ import utils.RedirectionUtil;
 /**
  * Service class providing functionality for blog detail pages including
  * comments, favourites, and likes
+ * @author Aashu Kumar Sah
  */
 public class BlogDetailService {
 	private Connection dbConnection;

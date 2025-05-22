@@ -12,6 +12,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class Logout. Handles user logout functionality by
  * invalidating the session and forwarding to a logout page.
+ * @author Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/logout" })
 public class Logout extends HttpServlet {

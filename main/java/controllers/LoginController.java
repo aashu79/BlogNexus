@@ -15,6 +15,7 @@ import java.io.IOException;
 /**
  * Servlet implementation for the LoginController. Handles login functionality,
  * including authentication and redirection based on user roles.
+ * @author Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/login" })
 public class LoginController extends HttpServlet {

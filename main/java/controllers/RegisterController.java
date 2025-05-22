@@ -17,6 +17,7 @@ import java.io.IOException;
  * Servlet implementation for the RegisterController. Handles user registration
  * functionality, including displaying the registration form and processing user
  * registration.
+ * @author Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB

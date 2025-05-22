@@ -13,6 +13,7 @@ import java.io.IOException;
 /**
  * Controller for blog creation. Handles displaying the blog creation form and
  * processing blog creation submissions.
+ * @author Sanjok Shrestha & Aashu Kumar Sah
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/user/blog/create" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, // 1MB

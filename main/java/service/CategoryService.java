@@ -17,6 +17,7 @@ import utils.ImageUtil;
 
 /**
  * Service class for category-related operations
+ * @author Aashu Kumar Sah
  */
 public class CategoryService {
 

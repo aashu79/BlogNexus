@@ -2,93 +2,182 @@ package model;
 
 import java.time.LocalDateTime;
 
+/**
+ * Model class representing a comment on a blog post.
+ *
+ * @author Aashu Kumar Sah
+ */
 public class CommentModel {
-	private int commentId;
-	private int blogId;
-	private String commentContent;
-	private int commentedBy;
-	private LocalDateTime commentedAt;
+    // Unique identifier for the comment
+    private int commentId;
+    // Identifier for the blog post this comment belongs to
+    private int blogId;
+    // Content of the comment
+    private String commentContent;
+    // User ID of the person who commented
+    private int commentedBy;
+    // Date and time when the comment was made
+    private LocalDateTime commentedAt;
 
-	// Additional fields for display
-	private String commenterName;
-	private String commenterProfilePicture;
-	private String commenterProfilePictureUrl;
+    // Additional fields for display
 
-	// Default constructor
-	public CommentModel() {
-	}
+    // Name of the commenter (for display purposes)
+    private String commenterName;
+    // File name or path of the commenter's profile picture
+    private String commenterProfilePicture;
+    // URL to the commenter's profile picture
+    private String commenterProfilePictureUrl;
 
-	// Parameterized constructor
-	public CommentModel(int commentId, int blogId, String commentContent, int commentedBy, LocalDateTime commentedAt) {
-		this.commentId = commentId;
-		this.blogId = blogId;
-		this.commentContent = commentContent;
-		this.commentedBy = commentedBy;
-		this.commentedAt = commentedAt;
-	}
+    /**
+     * Default constructor
+     */
+    public CommentModel() {
+    }
 
-	// Getters and setters
-	public int getCommentId() {
-		return commentId;
-	}
+    /**
+     * Parameterized constructor
+     * 
+     * @param commentId   Unique identifier for the comment
+     * @param blogId      Blog post ID to which this comment belongs
+     * @param commentContent Content of the comment
+     * @param commentedBy User ID of the commenter
+     * @param commentedAt Date and time when the comment was made
+     */
+    public CommentModel(int commentId, int blogId, String commentContent, int commentedBy, LocalDateTime commentedAt) {
+        this.commentId = commentId;
+        this.blogId = blogId;
+        this.commentContent = commentContent;
+        this.commentedBy = commentedBy;
+        this.commentedAt = commentedAt;
+    }
 
-	public void setCommentId(int commentId) {
-		this.commentId = commentId;
-	}
+    // Getters and setters
 
-	public int getBlogId() {
-		return blogId;
-	}
+    /**
+     * Gets the comment ID.
+     * @return commentId
+     */
+    public int getCommentId() {
+        return commentId;
+    }
 
-	public void setBlogId(int blogId) {
-		this.blogId = blogId;
-	}
+    /**
+     * Sets the comment ID.
+     * @param commentId Unique identifier for the comment
+     */
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
+    }
 
-	public String getCommentContent() {
-		return commentContent;
-	}
+    /**
+     * Gets the blog ID.
+     * @return blogId
+     */
+    public int getBlogId() {
+        return blogId;
+    }
 
-	public void setCommentContent(String commentContent) {
-		this.commentContent = commentContent;
-	}
+    /**
+     * Sets the blog ID.
+     * @param blogId Blog post ID
+     */
+    public void setBlogId(int blogId) {
+        this.blogId = blogId;
+    }
 
-	public int getCommentedBy() {
-		return commentedBy;
-	}
+    /**
+     * Gets the content of the comment.
+     * @return commentContent
+     */
+    public String getCommentContent() {
+        return commentContent;
+    }
 
-	public void setCommentedBy(int commentedBy) {
-		this.commentedBy = commentedBy;
-	}
+    /**
+     * Sets the content of the comment.
+     * @param commentContent Content of the comment
+     */
+    public void setCommentContent(String commentContent) {
+        this.commentContent = commentContent;
+    }
 
-	public LocalDateTime getCommentedAt() {
-		return commentedAt;
-	}
+    /**
+     * Gets the user ID of the commenter.
+     * @return commentedBy
+     */
+    public int getCommentedBy() {
+        return commentedBy;
+    }
 
-	public void setCommentedAt(LocalDateTime commentedAt) {
-		this.commentedAt = commentedAt;
-	}
+    /**
+     * Sets the user ID of the commenter.
+     * @param commentedBy User ID of the commenter
+     */
+    public void setCommentedBy(int commentedBy) {
+        this.commentedBy = commentedBy;
+    }
 
-	public String getCommenterName() {
-		return commenterName;
-	}
+    /**
+     * Gets the date and time when the comment was made.
+     * @return commentedAt
+     */
+    public LocalDateTime getCommentedAt() {
+        return commentedAt;
+    }
 
-	public void setCommenterName(String commenterName) {
-		this.commenterName = commenterName;
-	}
+    /**
+     * Sets the date and time when the comment was made.
+     * @param commentedAt Date and time of the comment
+     */
+    public void setCommentedAt(LocalDateTime commentedAt) {
+        this.commentedAt = commentedAt;
+    }
 
-	public String getCommenterProfilePicture() {
-		return commenterProfilePicture;
-	}
+    /**
+     * Gets the commenter's name.
+     * @return commenterName
+     */
+    public String getCommenterName() {
+        return commenterName;
+    }
 
-	public void setCommenterProfilePicture(String commenterProfilePicture) {
-		this.commenterProfilePicture = commenterProfilePicture;
-	}
+    /**
+     * Sets the commenter's name.
+     * @param commenterName Name of the commenter
+     */
+    public void setCommenterName(String commenterName) {
+        this.commenterName = commenterName;
+    }
 
-	public String getCommenterProfilePictureUrl() {
-		return commenterProfilePictureUrl;
-	}
+    /**
+     * Gets the path or file name of the commenter's profile picture.
+     * @return commenterProfilePicture
+     */
+    public String getCommenterProfilePicture() {
+        return commenterProfilePicture;
+    }
 
-	public void setCommenterProfilePictureUrl(String commenterProfilePictureUrl) {
-		this.commenterProfilePictureUrl = commenterProfilePictureUrl;
-	}
+    /**
+     * Sets the path or file name of the commenter's profile picture.
+     * @param commenterProfilePicture File name or path to the profile picture
+     */
+    public void setCommenterProfilePicture(String commenterProfilePicture) {
+        this.commenterProfilePicture = commenterProfilePicture;
+    }
+
+    /**
+     * Gets the URL to the commenter's profile picture.
+     * @return commenterProfilePictureUrl
+     */
+    public String getCommenterProfilePictureUrl() {
+        return commenterProfilePictureUrl;
+    }
+
+    /**
+     * Sets the URL to the commenter's profile picture.
+     * @param commenterProfilePictureUrl URL to the profile picture
+     */
+    public void setCommenterProfilePictureUrl(String commenterProfilePictureUrl) {
+        this.commenterProfilePictureUrl = commenterProfilePictureUrl;
+    }
 }

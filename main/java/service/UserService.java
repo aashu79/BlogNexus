@@ -23,6 +23,7 @@ import utils.ValidationUtils;
 
 /**
  * Service class for user management operations
+ * @author Aashu Kumar Sah
  */
 public class UserService {
 
