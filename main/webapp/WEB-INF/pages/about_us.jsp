@@ -22,27 +22,27 @@ At Blog Nexus, we believe in the power of words to inspire, educate, and transfo
             <h2>OUR TEAM</h2>
             <div class="team-members">
                 <div class="team-member">
-                    <img src="resources/images/image1.jpg" alt="Team Member 1">
+                    <img src="resources/images/About_images/Ashu.png" alt="Team Member 1">
                     <h3>Ashu Kumar Shah</h3>
                     <p>CEO</p>
                 </div>
                 <div class="team-member">
-                    <img src="resources/images/image1.jpg" alt="Team Member 2">
+                    <img src="resources/images/About_images/Ayush.png" alt="Team Member 2">
                     <h3>Ayush Bhattarai</h3>
                     <p>Developer</p>
                 </div>
                 <div class="team-member">
-                    <img src="resources/images/image1.jpg" alt="Team Member 3">
+                    <img src="resources/images/About_images/Sanjok.jpg" alt="Team Member 3">
                     <h3>Sanjok Shrestha</h3>
                     <p>Marketing Manager</p>
                 </div>
                 <div class="team-member">
-                    <img src="resources/images/image1.jpg" alt="Team Member 4">
-                    <h3>Bishal Kumar Rajak</h3>
+                    <img src="resources/images/About_images/Bishal.jpeg" alt="Team Member 4">
+                    <h3>Wishal Rajak</h3>
                     <p>Customer Support</p>
                 </div>
                 <div class="team-member">
-                    <img src="resources/images/image1.jpg" alt="Team Member 5">
+                    <img src="resources/images/About_images/Kamakshi.jpeg" alt="Team Member 5">
                     <h3>Kamakshi Gupta</h3>
                     <p>Software engineer</p>
                 </div>
@@ -54,7 +54,7 @@ At Blog Nexus, we believe in the power of words to inspire, educate, and transfo
         <section class="company-section">
             <h2>COMPANY HISTORY</h2>
             <ul>
-                <div class="milestone-tracker">
+	<div class="milestone-tracker">
   <h3>Our Growth Journey</h3>
   <div class="milestone-container">
     <div class="milestone-item">
@@ -79,6 +79,7 @@ At Blog Nexus, we believe in the power of words to inspire, educate, and transfo
     </div>
     <div class="milestone-line"></div>
   </div>
+
   <div class="join-story">
   <h3>OUR STORY</h3>
   <div class="story-paragraph">
@@ -89,7 +90,7 @@ At Blog Nexus, we believe in the power of words to inspire, educate, and transfo
   </div> 
     <div class="circle-mini"></div>
   </div>
-</div>                
+	</div>                
             </ul>
         </section>
     </main>
